@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<robot name="decor"> <!-- puzzle hard environment -->
+  <link name="obstacle_base">
+    <inertial>
+      <origin xyz="0 0 0" /> 
+      <mass value="1.0" />
+      <inertia  ixx="1.0" ixy="0.0"  ixz="0.0"  iyy="100.0"  iyz="0.0"  izz="1.0" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.65 0 -0.05"/>
+      <geometry>
+        <box size="0.92 2 0.1" />
+      </geometry>
+      <material name="Blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.65 0 -0.05"/>
+      <geometry>
+        <box size="0.92 2 0.1" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="j_decor_one" type="fixed">
+    <parent link="obstacle_base"/>
+    <child link="l_decor_one"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+        
+  <link name="l_decor_one">
+    <inertial>
+      <origin xyz="0 0 0" /> 
+      <mass value="1.0" />
+      <inertia  ixx="1.0" ixy="0.0"  ixz="0.0"  iyy="100.0"  iyz="0.0"  izz="1.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0.65 0 -0.05"/>
+      <geometry>
+        <box size="0.92 2 0.1" />
+      </geometry>
+      <material name="Blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.65 0 -0.05"/>
+      <geometry>
+        <box size="0.92 2 0.1" />
+      </geometry>
+    </collision>
+  </link>
+  
+  
+  <joint name="j_decor_two" type="fixed">
+    <parent link="l_decor_one"/>
+    <child link="l_decor_two"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+        
+  <link name="l_decor_two">
+    <inertial>
+      <origin xyz="0 0 0" /> 
+      <mass value="1.0" />
+      <inertia  ixx="1.0" ixy="0.0"  ixz="0.0"  iyy="100.0"  iyz="0.0"  izz="1.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 -0.65 -0.05"/>
+      <geometry>
+        <box size="0.4 0.7 0.1" />
+      </geometry>
+      <material name="Blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.65 -0.05"/>
+      <geometry>
+        <box size="0.4 0.7 0.1" />
+      </geometry>
+    </collision>   
+  </link>
+  
+  
+  <joint name="j_decor_three" type="fixed">
+    <parent link="l_decor_two"/>
+    <child link="l_decor_three"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+        
+  <link name="l_decor_three">
+    <inertial>
+      <origin xyz="0 0 0" /> 
+      <mass value="1.0" />
+      <inertia  ixx="1.0" ixy="0.0"  ixz="0.0"  iyy="100.0"  iyz="0.0"  izz="1.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0.65 -0.05"/>
+      <geometry>
+        <box size="0.4 0.7 0.1" />
+      </geometry>
+      <material name="Blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.65 -0.05"/>
+      <geometry>
+        <box size="0.4 0.7 0.1" />
+      </geometry>
+    </collision>   
+  </link>
+</robot>

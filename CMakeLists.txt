@@ -53,6 +53,8 @@ install(FILES
 install(FILES
   urdf/lydia.urdf
   urdf/obstacle.urdf
+  urdf/obstacle_medium.urdf
+  urdf/obstacle_easy.urdf
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/urdf
   )
 install(FILES srdf/lydia.srdf 
