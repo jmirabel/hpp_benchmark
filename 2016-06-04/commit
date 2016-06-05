@@ -2,7 +2,6 @@ collada-dom: 1d49f787f52f1d41aac6f08e03076e8c76f589d2
 gepetto-viewer: 4b188bc0af6d5f5d5e730d964f4fb31232b546f0
 gepetto-viewer-corba: b5cf905665faaa9de42c5cbf07bd041fd8ea13b5
 hpp-baxter: 08a9aefcf9c5e6d7e4d5ce320e838d9a81f9a69c
-hpp_benchmark: 1ea1f4738200b0d0f4e6a812295ba0a6963f4d4b
 hpp-constraints: cef397962b71983df333cacc8ac7634657e2f2f2
 hpp-corbaserver: 7e7ed35356bd71641950a99e33b69bce4ef8149d
 hpp-core: 31ae4bc1dbc39b9a1afc4a9383a7e58b8d31d698

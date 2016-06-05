@@ -84,9 +84,9 @@ for n in jointNames['all']:
 
 ps.addPassiveDofs ('pr2', jointNames ['pr2'])
 
-cg.createGrasp ('l_grasp', 'pr2/l_gripper', 'box/handle', 'pr2')
+cg.createGrasp ('l_grasp', 'pr2/l_gripper', 'box/handle')
 
-cg.createGrasp ('r_grasp', 'pr2/r_gripper', 'box/handle2', 'pr2')
+cg.createGrasp ('r_grasp', 'pr2/r_gripper', 'box/handle2')
 
 cg.createPreGrasp ('l_pregrasp', 'pr2/l_gripper', 'box/handle')
 cg.createPreGrasp ('r_pregrasp', 'pr2/r_gripper', 'box/handle2')
@@ -127,7 +127,7 @@ _["both"]="2 grasps"
 _["left"]="Left grasp"
 _["right"]="Right grasp"
 _["free"]="No grasp"
-
+_["move_both"] = "move both"
 # _["r_grasp"]=""
 # _["l_grasp"]=""
 # _["b_r_grasp"]=""
@@ -196,6 +196,8 @@ cg.createEdge ('free', 'free', 'move_free', 1)
 cg.createEdge ('left', 'left', 'l_keep_grasp', 5)
 
 cg.createEdge ('right', 'right', 'r_keep_grasp', 5)
+
+cg.createEdge ('both', 'both', 'move_both', 1)
 
 cg.setConstraints (edge='move_free', lockDof = lockbox)
 # 4}}}
