@@ -1,0 +1,5 @@
+Modifications since 2016-06-03
+
+  - in hpp::core::ConfigProjector, check that numerical constraint is not
+    already in vector before inserting.
+  - In Edge::buildConfigConstraints, add node constraints when edge is in from.
