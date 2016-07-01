@@ -1,0 +1,7 @@
+Modifications since 2016-06-04
+
+  in hpp-manipulation-corba
+    Modification in idl methods Graph::createEdge and Graph::createWaypointEdge
+      - they now take as input the node id of the node in which the edge lies.
+    Add an idl method to get the node containing an edge.
+    Add some methods to ProblemSolver python class.
