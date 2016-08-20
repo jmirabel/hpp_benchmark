@@ -1,6 +1,6 @@
 # vim: foldmethod=marker foldlevel=2
 from hpp.corbaserver.manipulation.baxter import Robot
-from hpp.corbaserver.manipulation import ProblemSolver, ConstraintGraph
+from hpp.corbaserver.manipulation import ProblemSolver, ConstraintGraph, Rule
 from hpp.gepetto.manipulation import ViewerFactory
 from hpp.gepetto import Color
 from math import sqrt
@@ -134,30 +134,18 @@ for i in xrange(K):
   handles.append ([boxes[i] + "/handle2"])
   shapes .append ([boxes[i] + "/box_surface"])
 
-ps.client.manipulation.graph.autoBuild ("graph",
+if K is 2:
+    rules = [ Rule(grippers[0], handles[1][0], False),
+              Rule(grippers[1], handles[0][0], False), ]
+else:
+    rules = []
+
+# Build the constraint graph
+cg = ConstraintGraph.buildGenericGraph(robot, "graph",
         grippers, boxes, handles, shapes,
         ['table/pancake_table_table_top'],
-        [])
-
-# Get the built graph
-cg = ConstraintGraph (robot, 'graph', makeGraph = False)
+        rules)
 cg.setConstraints (graph = True, lockDof = lockAll)
-
-# cg.graph.setTargetNodeList (cg.subGraphId,
-    # [
-      # cg.nodes['free'],
-      # cg.nodes['baxter/r_gripper grasps box0/handle2'],
-      # cg.nodes['free'],
-      # cg.nodes['baxter/r_gripper grasps box1/handle2'],
-      # cg.nodes['free'],
-      # cg.nodes['baxter/r_gripper grasps box2/handle2'],
-      # cg.nodes['free'],
-      # cg.nodes['baxter/r_gripper grasps box3/handle2'],
-      # cg.nodes['free'],
-      # cg.nodes['baxter/r_gripper grasps box0/handle2'],
-      # cg.nodes['free'],
-      # ]
-    # )
 
 res = ps.client.manipulation.problem.applyConstraints (cg.nodes['free'], q_init)
 if not res[0]:
