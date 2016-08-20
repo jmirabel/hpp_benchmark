@@ -1,0 +1,8 @@
+Modifications since 2016-08-19
+
+  in hpp-manipulation
+    - fix bugs related to the registration of leaves of foliation.
+    - some changes to the graph::helper::autoBuild feature.
+
+baxter-manipulation-boxes-easy/script.py solves the same problem as 2016-07-01/baxter-manipulation-boxes/script.py
+but the problem is set up using a generic contraint graph.
