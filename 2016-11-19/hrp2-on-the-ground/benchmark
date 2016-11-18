@@ -1,0 +1,45 @@
+0:00:00.740950
+Number nodes: 11
+0:00:00.746013
+Number nodes: 8
+0:00:00.383091
+Number nodes: 4
+0:00:01.032493
+Number nodes: 12
+0:00:03.313851
+Number nodes: 33
+0:00:07.715799
+Number nodes: 70
+0:00:02.552253
+Number nodes: 26
+0:00:00.959688
+Number nodes: 8
+0:00:04.152591
+Number nodes: 45
+0:00:02.601810
+Number nodes: 26
+0:00:03.192243
+Number nodes: 33
+0:00:01.696584
+Number nodes: 17
+0:00:00.929212
+Number nodes: 15
+0:00:04.969217
+Number nodes: 48
+0:00:00.755540
+Number nodes: 8
+0:00:00.981625
+Number nodes: 8
+0:00:04.379047
+Number nodes: 47
+0:00:01.945078
+Number nodes: 20
+0:00:07.047305
+Number nodes: 67
+0:00:02.489567
+Number nodes: 22
+Average time: 2.62919785
+Average number nodes: 26.4
+
+
+# NOTE : this benchmark was run with full model (and not capsule model as the older benchmarks)

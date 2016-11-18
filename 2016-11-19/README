@@ -1,0 +1,10 @@
+topic/pinocchio branches as of 2016/11/19.
+
+Benchmark run on largo : 
+64Gb RAM, Intel Xeon E5-1630 processor running at 3.7GHz
+
+Not working : 
+
+- pr2-manipulation-kitchen
+- pr2-manipulation-two-hand
+- hrp2-on-the-ground doesn't work with the 'capsule' urdf but work with the standard urdf (execution time recorded with the standard urdf)
