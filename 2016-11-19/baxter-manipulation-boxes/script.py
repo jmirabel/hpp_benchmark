@@ -1,6 +1,6 @@
 # vim: foldmethod=marker foldlevel=2
 from hpp.corbaserver.manipulation.baxter import Robot
-from hpp.corbaserver.manipulation import ProblemSolver, ConstraintGraph
+from hpp.corbaserver.manipulation import ProblemSolver, ConstraintGraph, Rule
 from hpp.gepetto.manipulation import ViewerFactory
 from hpp.gepetto import Color
 from math import sqrt
@@ -128,16 +128,19 @@ lockAll = lockFingers + lockHead
 
 # 3}}}
 
+handlesPerObject = list ()
 handles = list ()
 shapes  = list ()
 for i in xrange(K):
-  handles.append ([boxes[i] + "/handle2"])
+  handlesPerObject.append ([boxes[i] + "/handle2"])
+  handles.append (boxes[i] + "/handle2")
   shapes .append ([boxes[i] + "/box_surface"])
 
+rules = [Rule (grippers, handles, True),]
 ps.client.manipulation.graph.autoBuild ("graph",
-        grippers, boxes, handles, shapes,
+        grippers, boxes, handlesPerObject, shapes,
         ['table/pancake_table_table_top'],
-        [])
+        rules)
 
 # Get the built graph
 cg = ConstraintGraph (robot, 'graph', makeGraph = False)
