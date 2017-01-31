@@ -27,13 +27,13 @@ vf = ViewerFactory (ps)
 
 vf.loadObjectModel (Box, 'box')
 vf.loadEnvironmentModel (Environment, "kitchen_area")
-robot.setJointBounds ("pr2/root_joint" , [-5,-2,-5.2,-2.7,-2,2,-2,2] )
-robot.setJointBounds ("box/root_joint", [-5.1,-2,-5.2,-2.7,0,1.5,-2,2,-2,2,-2,2,-2,2])
+robot.setJointBounds ("pr2/root_joint" , [-5,-2,-5.2,-2.7] )
+robot.setJointBounds ("box/root_joint", [-5.1,-2,-5.2,-2.7,0,1.5])
 # 3}}}
 
 # Define configurations. {{{3
 q_init = robot.getCurrentConfig ()
-q_init[0:3] = [-3.2,-4,0] # FIX ME ! (see up )
+q_init[0:4] = [-3.2,-4,1,0] # FIX ME ! (see up )
 rank = robot.rankInConfiguration ['pr2/r_gripper_l_finger_joint']
 q_init [rank] = 0.5
 rank = robot.rankInConfiguration ['pr2/r_gripper_r_finger_joint']
