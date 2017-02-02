@@ -1,0 +1,4 @@
+topic/pinocchio branches as of 2017/02/02.
+
+All benchmarks work with running time close to those obtained with devel
+branches, except pr2-manipulation-kitchen that fails half of the time.
