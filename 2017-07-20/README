@@ -1,0 +1,9 @@
+devel branches as of 2017/07/20.
+
+Changes:
+- Device caching of forward kinematics has been fixed (was not working before)
+- hpp-constraints now provides constraint solvers handling explicit and
+  implicit functions.
+- add spline path
+- add continuous collision check for spline path
+- add a gradient based optimizer using spline path

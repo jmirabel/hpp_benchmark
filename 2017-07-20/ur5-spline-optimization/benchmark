@@ -1,0 +1,68 @@
+Optimizer parameters are:
+alphaInit: 0.3
+alwaysStopAtFirst: 1
+linearizeAtEachStep: 0
+
+Solve: 0:00:00.183554
+Optim: 0:00:01.149092
+Number nodes: 105
+Solve: 0:00:00.027144
+Optim: 0:00:00.428966
+Number nodes: 26
+Solve: 0:00:00.042852
+Optim: 0:00:00.372915
+Number nodes: 47
+Solve: 0:00:00.036272
+Optim: 0:00:00.293665
+Number nodes: 32
+Solve: 0:00:00.039818
+Optim: 0:00:00.499918
+Number nodes: 33
+Solve: 0:00:00.025040
+Optim: 0:00:00.096322
+Number nodes: 20
+Solve: 0:00:00.098339
+Optim: 0:00:00.473678
+Number nodes: 83
+Solve: 0:00:00.024655
+Optim: 0:00:00.087426
+Number nodes: 26
+Solve: 0:00:00.047158
+Optim: 0:00:00.517640
+Number nodes: 44
+Solve: 0:00:00.022330
+Optim: 0:00:00.232471
+Number nodes: 25
+Solve: 0:00:00.030589
+Optim: 0:00:00.465701
+Number nodes: 29
+Solve: 0:00:00.017638
+Optim: 0:00:00.407012
+Number nodes: 18
+Solve: 0:00:00.042941
+Optim: 0:00:00.789762
+Number nodes: 50
+Solve: 0:00:00.026664
+Optim: 0:00:00.192491
+Number nodes: 25
+Solve: 0:00:00.073636
+Optim: 0:00:00.856179
+Number nodes: 65
+Solve: 0:00:00.107954
+Optim: 0:00:00.708166
+Number nodes: 103
+Solve: 0:00:00.054191
+Optim: 0:00:00.928199
+Number nodes: 56
+Solve: 0:00:00.082292
+Optim: 0:00:00.088737
+Number nodes: 73
+Solve: 0:00:00.033491
+Optim: 0:00:00.375049
+Number nodes: 31
+Solve: 0:00:00.074252
+Optim: 0:00:00.664125
+Number nodes: 73
+Average solve time: 0.0545405
+Average optim time: 0.4813757
+Average number nodes: 48.2
