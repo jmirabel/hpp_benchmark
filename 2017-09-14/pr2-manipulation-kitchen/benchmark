@@ -1,0 +1,51 @@
+Python 2.7.6 (default, Oct 26 2016, 20:30:19) 
+Type "copyright", "credits" or "license" for more information.
+
+IPython 1.2.1 -- An enhanced Interactive Python.
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+0:00:17.946781
+Number nodes: 85
+0:00:28.710235
+Number nodes: 130
+0:00:27.859699
+Number nodes: 127
+0:00:10.805962
+Number nodes: 49
+0:00:21.415087
+Number nodes: 78
+0:00:31.353928
+Number nodes: 136
+0:00:43.086993
+Number nodes: 237
+0:00:08.263516
+Number nodes: 40
+0:00:16.034457
+Number nodes: 73
+0:00:17.479466
+Number nodes: 71
+0:00:51.474270
+Number nodes: 250
+0:00:09.076312
+Number nodes: 39
+0:00:15.599721
+Number nodes: 77
+0:00:05.336042
+Number nodes: 16
+0:00:05.910822
+Number nodes: 32
+0:00:04.154198
+Number nodes: 17
+0:00:16.521002
+Number nodes: 95
+0:00:16.062702
+Number nodes: 75
+0:00:41.789483
+Number nodes: 219
+0:00:20.386169
+Number nodes: 99
+Number of successes: 20
+Average time: 20.46334225
+Average number nodes: 97.25
