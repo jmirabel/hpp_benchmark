@@ -1,0 +1,4 @@
+devel branches as of 2017-11-11
+
+  - Implementation of LiegroupSpace and LiegroupElement in hpp-pinocchio.
+  - benchmarks run on florent-laptop.
