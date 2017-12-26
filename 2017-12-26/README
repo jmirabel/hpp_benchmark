@@ -1,0 +1,4 @@
+devel branches as of 2017-12-26
+
+  - Transition paths use explicit constraints for relative transformation,
+  - benchmarks run on florent-laptop.
