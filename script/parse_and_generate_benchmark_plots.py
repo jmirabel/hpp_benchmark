@@ -22,6 +22,7 @@ else:
             "pr2-ini-iai-kitchen",
             "pr2-manipulation-kitchen",
             "pr2-manipulation-two-hand",
+            "romeo-placard",
             "ur5_path_projection",
             "ur5-spline-optimization",
             ]
