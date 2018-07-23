@@ -9,7 +9,7 @@ from math import pi, fabs
 import hpp
 from hpp.corbaserver.manipulation import ConstraintGraphFactory, Rule
 from setup import ConstraintGraph, Constraints, grippers, handlesPerObjects, nCylinder, nSphere, objects, ps, robot, shapesPerObject, vf
-from hpp.gepetto import PathPlayer, PathPlayerGui
+from hpp.gepetto import PathPlayer
 from state_name import StateName
 from visibility_prm import VisibilityPRM
 import time
