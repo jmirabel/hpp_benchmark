@@ -1,6 +1,7 @@
 # Import libraries and load robots. {{{1
 
 # Import. {{{2
+from math import sqrt
 from hpp.corbaserver.manipulation.pr2 import Robot
 from hpp.corbaserver.manipulation import ProblemSolver, ConstraintGraph, \
   ConstraintGraphFactory, Constraints, Rule
@@ -76,7 +77,7 @@ q_init [0:2] = [-3.2, -4]
 rank = robot.rankInConfiguration ['pr2/torso_lift_joint']
 q_init [rank] = 0.2
 rank = robot.rankInConfiguration ['box/root_joint']
-q_init [rank:rank+7] = [-2.5, -4, 0.8,0,0,0,1]
+q_init [rank:rank+7] = [-2.5, -4, 0.9, 0, sqrt (2)/2, 0, sqrt (2)/2]
 
 q_goal [0:2] = [-3.2, -4]
 rank = robot.rankInConfiguration ['pr2/l_shoulder_lift_joint']
@@ -88,7 +89,7 @@ q_goal [rank] = 0.5
 rank = robot.rankInConfiguration ['pr2/r_elbow_flex_joint']
 q_goal [rank] = -0.5
 rank = robot.rankInConfiguration ['box/root_joint']
-q_goal [rank:rank+7] = [-4.8, -4.8, 0.9, 0, 0, 1, 0]
+q_goal [rank:rank+7] = [-4.8, -4.8, 0.9, 0, sqrt (2)/2, 0, sqrt (2)/2]
 #rank = robot.rankInConfiguration ['box/base_joint_SO3']
 #q_goal [rank:rank+4] = [0, 0, 0, 1]
 # 2}}}
@@ -106,11 +107,11 @@ ps.createLockedJoint ('l_r_finger', 'pr2/l_gripper_r_finger_joint', [0.5,])
 grippers = ['pr2/l_gripper']
 boxes = ['box']
 handlesPerObject = [['box/handle']]
-# envSurfaces = ['kitchen_area/pancake_table_table_top',
-#                'kitchen_area/white_counter_top_sink']
-# objContactSurfaces = [['box/box_surface']]
-envSurfaces = []
-objContactSurfaces = [[]]
+envSurfaces = ['kitchen_area/pancake_table_table_top',
+               'kitchen_area/white_counter_top_sink']
+objContactSurfaces = [['box/box_surface']]
+#envSurfaces = []
+#objContactSurfaces = [[]]
 
 # Get the built graph
 cg = ConstraintGraph (robot, 'graph')
