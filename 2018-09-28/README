@@ -1,0 +1,6 @@
+Benchmark run after refactoring constraints
+
+  - Error of explicit relative poses are now evaluated with the implicit
+    formulation to make the value consistent between edges and nodes in the
+    manipulation constraint graph.
+    
