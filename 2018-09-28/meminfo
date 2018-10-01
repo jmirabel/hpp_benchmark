@@ -1,0 +1,49 @@
+cat /proc/meminfo
+
+MemTotal:        8039160 kB
+MemFree:         4244932 kB
+MemAvailable:    6139152 kB
+Buffers:          382624 kB
+Cached:          1862488 kB
+SwapCached:            0 kB
+Active:          1857376 kB
+Inactive:        1468072 kB
+Active(anon):    1081600 kB
+Inactive(anon):   324240 kB
+Active(file):     775776 kB
+Inactive(file):  1143832 kB
+Unevictable:          48 kB
+Mlocked:              48 kB
+SwapTotal:       8258044 kB
+SwapFree:        8258044 kB
+Dirty:              1408 kB
+Writeback:             0 kB
+AnonPages:       1080380 kB
+Mapped:           463812 kB
+Shmem:            325508 kB
+Slab:             357052 kB
+SReclaimable:     279396 kB
+SUnreclaim:        77656 kB
+KernelStack:        9216 kB
+PageTables:        34712 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    12277624 kB
+Committed_AS:    5344864 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      157444 kB
+DirectMap2M:     8101888 kB
