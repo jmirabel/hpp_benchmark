@@ -1,3 +1,6 @@
+# Start hpp-manipulation-server before running this script
+# Note that an instance of omniNames should be running in background
+#
 # vim: foldmethod=marker foldlevel=2
 from hpp.corbaserver.manipulation.pr2 import Robot
 from hpp.corbaserver.manipulation import ProblemSolver, Constraints, \

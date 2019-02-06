@@ -1,3 +1,6 @@
+# Start hppcorbaserver before running this script
+# Note that an instance of omniNames should be running in background
+#
 from hpp.corbaserver.pr2 import Robot
 from hpp.gepetto import PathPlayer
 from math import pi

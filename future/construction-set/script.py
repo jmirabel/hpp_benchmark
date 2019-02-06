@@ -3,6 +3,9 @@
 #
 #  Author: Florent Lamiraux
 #
+# Start hpp-manipulation-server before running this script
+# Note that an instance of omniNames should be running in background
+#
 
 import re, os
 from math import pi, fabs

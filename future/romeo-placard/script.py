@@ -1,4 +1,5 @@
-#
+# Start hpp-manipulation-server before running this script
+# Note that an instance of omniNames should be running in background
 #
 
 from __future__ import print_function

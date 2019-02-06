@@ -1,5 +1,9 @@
 #/usr/bin/env python
 
+# Start hpp-wholebody-step-server before running this script
+# Note that an instance of omniNames should be running in background
+#
+
 from hpp.corbaserver.hrp2 import Robot
 from hpp.corbaserver import ProblemSolver
 from hpp.corbaserver.wholebody_step.client import Client as WsClient, Problem
