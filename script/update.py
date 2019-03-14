@@ -24,7 +24,9 @@ for pkg, commit_id in commits.iteritems ():
                'git --work-tree=./' + pkg + ' --git-dir=./' + pkg +
                '/.git branch -D benchmark',
                'git --work-tree=./' + pkg + ' --git-dir=./' + pkg +
-               '/.git checkout -b benchmark ' + commit_id ]
+               '/.git checkout -b benchmark ' + commit_id,
+               'if [ -f ' + pkg + '/.gitmodules ]; then cd ' + pkg +
+               '; git submodule update; cd ..; fi']
     for c, i in zip (command, xrange (1000)):
         print (c)
         res = commands.getstatusoutput (c)
