@@ -155,6 +155,7 @@ import datetime as dt
 totalTime = dt.timedelta (0)
 totalNumberNodes = 0
 N = 20
+
 for i in range (N):
     ps.clearRoadmap ()
     ps.resetGoalConfigs ()
