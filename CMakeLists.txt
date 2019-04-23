@@ -22,22 +22,16 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 SET(CXX_DISABLE_WERROR TRUE)
 INCLUDE(cmake/base.cmake)
 INCLUDE(cmake/python.cmake)
+INCLUDE(cmake/hpp.cmake)
 
 SET(PROJECT_NAME hpp_benchmark)
 SET(PROJECT_DESCRIPTION
   "Tutorial for humanoid path planner platform."
 )
-SET(PROJECT_URL "")
 
 FINDPYTHON()
 
-SETUP_PROJECT()
-
-# Activate hpp-util logging if requested
-SET (HPP_DEBUG FALSE CACHE BOOL "trigger hpp-util debug output")
-IF (HPP_DEBUG)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHPP_DEBUG")
-ENDIF()
+SETUP_HPP_PROJECT()
 
 ADD_DOC_DEPENDENCY("hpp-core >= 3")
 ADD_REQUIRED_DEPENDENCY("hpp-corbaserver >= 3")
@@ -57,11 +51,43 @@ install(FILES
   urdf/obstacle_easy.urdf
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/urdf
   )
-install(FILES srdf/lydia.srdf 
+install(FILES srdf/lydia.srdf
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/srdf
   )
 install (FILES
   src/hpp/corbaserver/lydia/robot.py
   src/hpp/corbaserver/lydia/__init__.py
   DESTINATION ${PYTHON_SITELIB}/hpp/corbaserver/lydia)
-SETUP_PROJECT_FINALIZE()
+
+install(FILES
+  future/baxter-manipulation-boxes/script.py
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/baxter-manipulation-boxes)
+
+install(FILES
+  future/construction-set/script.py
+  future/construction-set/setup.py
+  future/construction-set/state_name.py
+  future/construction-set/visibility_prm.py
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/construction-set)
+
+install(FILES
+  future/hrp2-on-the-ground/script.py
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/hrp2-on-the-ground)
+
+install(FILES
+  future/pr2-in-iai-kitchen/script.py
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/pr2-in-iai-kitchen)
+
+install(FILES
+  future/pr2-manipulation-kitchen/script.py
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/pr2-manipulation-kitchen)
+
+install(FILES
+  future/pr2-manipulation-two-hand/script.py
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/pr2-manipulation-two-hand)
+
+install(FILES
+  future/romeo-placard/script.py
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/romeo-placard)
+
+SETUP_HPP_PROJECT_FINALIZE()
