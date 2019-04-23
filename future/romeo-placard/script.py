@@ -1,8 +1,10 @@
+#!/usr/bin/env python
 # Start hppcorbaserver before running this script
 # Note that an instance of omniNames should be running in background
 #
 
 from __future__ import print_function
+from argparse import ArgumentParser
 import time, CORBA, re, os, sys
 from hpp.corbaserver.manipulation import ProblemSolver, ConstraintGraph, \
     ConstraintGraphFactory, Constraints, Rule, Client
@@ -11,6 +13,13 @@ from hpp.gepetto.manipulation import Viewer, ViewerFactory
 from hpp.gepetto import PathPlayer
 from hpp import Transform
 from hpp.corbaserver import loadServerPlugin
+
+parser = ArgumentParser()
+parser.add_argument('-N', default=20, type=int)
+parser.add_argument('--display', action='store_true')
+parser.add_argument('--run', action='store_true')
+args = parser.parse_args()
+
 loadServerPlugin ("corbaserver", "manipulation-corba.so")
 Client ().problem.resetProblem ()
 
@@ -134,7 +143,7 @@ cg = ConstraintGraph.buildGenericGraph (robot, "graph",
 # factory.setObjects ([placard.name,], handlesPerObjects, [[],])
 # factory.setRules (rules)
 # factory.generate ()
-  
+
 cg.addConstraints (graph = True, constraints = commonConstraints)
 cg.initialize ()
 
@@ -154,8 +163,7 @@ ps.selectPathProjector ("Progressive", .05)
 import datetime as dt
 totalTime = dt.timedelta (0)
 totalNumberNodes = 0
-N = 20
-for i in range (N):
+for i in range (args.N):
     ps.clearRoadmap ()
     ps.resetGoalConfigs ()
     ps.setInitialConfig (q_init)
@@ -169,13 +177,17 @@ for i in range (N):
     totalNumberNodes += n
     print ("Number nodes: " + str(n))
 
-if N!=0:
+if args.N!=0:
   print ("Average time: " +
-         str ((totalTime.seconds+1e-6*totalTime.microseconds)/float (N)))
-  print ("Average number nodes: " + str (totalNumberNodes/float (N)))
+         str ((totalTime.seconds+1e-6*totalTime.microseconds)/float (args.N)))
+  print ("Average number nodes: " + str (totalNumberNodes/float (args.N)))
 
-# v = vf.createViewer ()
-# v (q)
+if args.display:
+    v = vf.createViewer ()
+    v (q)
+    pp = PathPlayer(v)
+    if args.run:
+        pp(0)
 
 def toVector (s):
   return map (float, filter (lambda x: x != "", s.split (" ")))

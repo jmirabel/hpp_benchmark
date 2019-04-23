@@ -1,9 +1,11 @@
+#!/usr/bin/env python
 # Start hppcorbaserver before running this script
 # Note that an instance of omniNames should be running in background
 #
 # Import libraries and load robots. {{{1
 
 # Import. {{{2
+from argparse import ArgumentParser
 from math import sqrt
 from hpp.corbaserver.manipulation.pr2 import Robot
 from hpp.corbaserver.manipulation import ProblemSolver, ConstraintGraph, \
@@ -13,6 +15,14 @@ from math import pi
 from hpp.corbaserver import loadServerPlugin
 loadServerPlugin ("corbaserver", "manipulation-corba.so")
 Client ().problem.resetProblem ()
+# 2}}}
+
+# parse arguments {{{2
+parser = ArgumentParser()
+parser.add_argument('-N', default=20, type=int)
+parser.add_argument('--display', action='store_true')
+parser.add_argument('--run', action='store_true')
+args = parser.parse_args()
 # 2}}}
 
 # Load PR2 and a box to be manipulated. {{{2
@@ -146,8 +156,8 @@ ps.setMaxIterPathPlanning (5000)
 import datetime as dt
 totalTime = dt.timedelta (0)
 totalNumberNodes = 0
-N = 20; success = 0
-for i in range (N):
+success = 0
+for i in range (args.N):
     ps.clearRoadmap ()
     ps.resetGoalConfigs ()
     ps.setInitialConfig (q_init)
@@ -172,8 +182,11 @@ print ("Average number nodes: " + str (totalNumberNodes/float (success)))
 
 # 1}}}
 
-from hpp.gepetto import PathPlayer
-#v = vf.createViewer (); v (q_init)
-#pp = PathPlayer (v, robot.client.basic)
+if args.display:
+    from hpp.gepetto import PathPlayer
+    v = vf.createViewer (); v (q_init)
+    pp = PathPlayer (v, robot.client.basic)
+    if args.run:
+        pp(0)
 
 # vim: foldmethod=marker foldlevel=1

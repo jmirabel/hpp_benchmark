@@ -1,9 +1,18 @@
+#!/usr/bin/env python
 # Start hppcorbaserver before running this script
 # Note that an instance of omniNames should be running in background
 #
+
+from argparse import ArgumentParser
 from hpp.corbaserver.pr2 import Robot
 from hpp.gepetto import PathPlayer
 from math import pi
+
+parser = ArgumentParser()
+parser.add_argument('-N', default=20, type=int)
+parser.add_argument('--display', action='store_true')
+parser.add_argument('--run', action='store_true')
+args = parser.parse_args()
 
 robot = Robot ('pr2')
 robot.setJointBounds ("root_joint", [-4, -3, -5, -3,-2,2,-2,2])
@@ -37,8 +46,7 @@ ps.selectPathValidation ("Progressive", 0.025)
 import datetime as dt
 totalTime = dt.timedelta (0)
 totalNumberNodes = 0
-N = 20
-for i in range (N):
+for i in range (args.N):
     ps.clearRoadmap ()
     ps.resetGoalConfigs ()
     ps.setInitialConfig (q_init)
@@ -52,9 +60,11 @@ for i in range (N):
     totalNumberNodes += n
     print ("Number nodes: " + str(n))
 
-print ("Average time: " + str ((totalTime.seconds+1e-6*totalTime.microseconds)/float (N)))
-print ("Average number nodes: " + str (totalNumberNodes/float (N)))
+print ("Average time: " + str ((totalTime.seconds+1e-6*totalTime.microseconds)/float (args.N)))
+print ("Average number nodes: " + str (totalNumberNodes/float (args.N)))
 
-#v = vf.createViewer(); v (q_init)
-#pp = PathPlayer (v, robot.client)
-
+if args.display:
+    v = vf.createViewer(); v (q_init)
+    pp = PathPlayer (v, robot.client)
+    if args.run:
+        pp(0)

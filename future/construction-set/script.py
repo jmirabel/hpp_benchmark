@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #
 #  Copyright (2017) CNRS
 #
@@ -8,6 +9,7 @@
 #
 
 import re, os
+from argparse import ArgumentParser
 from math import pi, fabs
 import hpp
 from hpp.corbaserver.manipulation import ConstraintGraphFactory, Rule
@@ -16,6 +18,12 @@ from hpp.gepetto import PathPlayer
 from state_name import StateName
 from visibility_prm import VisibilityPRM
 import time
+
+parser = ArgumentParser()
+parser.add_argument('-N', default=20, type=int)
+parser.add_argument('--display', action='store_true')
+parser.add_argument('--run', action='store_true')
+args = parser.parse_args()
 
 def cleanPaths (ps, solutions) :
   offset = 0
@@ -110,8 +118,7 @@ def getEdges (graph, nodes, exploreNodes):
 dC = lambda q1,q2: reduce (lambda x,y : x if fabs (y [0]- y [1]) < x \
                            else fabs (y [0]- y [1]), zip (q1, q2), 0)
 
-display = False
-if display:
+if args.display:
   v = vf.createViewer ()
   pp = PathPlayer (v)
 else:
@@ -138,7 +145,7 @@ while i < nCylinder:
   i+=1; y = -y
 
 q0 = q0_r0 + q0_r1 + sum (q0_spheres, []) + sum (q0_cylinders, [])
-if display:
+if args.display:
   v (q0)
 
 # List of nodes composing the assembly sequence
@@ -303,8 +310,7 @@ solutions = list ()
 import datetime as dt
 totalTime = dt.timedelta (0)
 totalNumberNodes = 0
-N = 20
-for i in range (N):
+for i in range (args.N):
   numberNodes = 0
   # Try 20 times to solve the problem and stop at first success
   t1 = dt.datetime.now ()
@@ -331,7 +337,10 @@ for i in range (N):
   print ("Number nodes: " + str(n))
   totalNumberNodes += numberNodes
 
-if N != 0:
-  print ("Average time: " + str ((totalTime.seconds+1e-6*totalTime.microseconds)/float (N)))
-  print ("Average number nodes: " + str (totalNumberNodes/float(N)))
+if args.N != 0:
+  print ("Average time: " + str ((totalTime.seconds+1e-6*totalTime.microseconds)/float (args.N)))
+  print ("Average number nodes: " + str (totalNumberNodes/float(args.N)))
   cleanPaths (ps, solutions)
+
+if args.run:
+  pp(0)

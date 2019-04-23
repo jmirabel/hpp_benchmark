@@ -1,7 +1,11 @@
+#!/usr/bin/env python
 # Start hppcorbaserver before running this script
 # Note that an instance of omniNames should be running in background
 #
 # vim: foldmethod=marker foldlevel=2
+
+from argparse import ArgumentParser
+
 from hpp.corbaserver.manipulation.baxter import Robot
 from hpp.corbaserver.manipulation import ProblemSolver, ConstraintGraph, \
     ConstraintGraphFactory, Constraints, Rule, Client
@@ -11,6 +15,12 @@ from math import sqrt
 from hpp.corbaserver import loadServerPlugin
 loadServerPlugin ("corbaserver", "manipulation-corba.so")
 Client ().problem.resetProblem ()
+
+parser = ArgumentParser()
+parser.add_argument('-N', default=20, type=int)
+parser.add_argument('--display', action='store_true')
+parser.add_argument('--run', action='store_true')
+args = parser.parse_args()
 
 # nbBoxes
 K = 2
@@ -174,8 +184,7 @@ ps.addGoalConfig (q_goal_proj)
 import datetime as dt
 totalTime = dt.timedelta (0)
 totalNumberNodes = 0
-N = 20
-for i in range (N):
+for i in range (args.N):
     ps.clearRoadmap ()
     ps.resetGoalConfigs ()
     ps.setInitialConfig (q_init_proj)
@@ -189,9 +198,12 @@ for i in range (N):
     totalNumberNodes += n
     print ("Number nodes: " + str(n))
 
-if N != 0:
-  print ("Average time: " + str ((totalTime.seconds+1e-6*totalTime.microseconds)/float (N)))
-  print ("Average number nodes: " + str (totalNumberNodes/float(N)))
+if args.N != 0:
+  print ("Average time: " + str ((totalTime.seconds+1e-6*totalTime.microseconds)/float (args.N)))
+  print ("Average number nodes: " + str (totalNumberNodes/float(args.N)))
 
-#v = vf.createViewer ()
-#pp = PathPlayer (v)
+if args.display:
+    v = vf.createViewer ()
+    pp = PathPlayer (v)
+    if args.run:
+        pp(0)
