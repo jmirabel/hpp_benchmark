@@ -92,7 +92,7 @@ for j,v in robot.leftHandOpen.iteritems():
         val = [v,]
     else:
         val = v;
-    ps.createLockedJoint ('romeo/' + j, robot.displayName + '/' + j, val)
+    ps.createLockedJoint ('romeo/' + j, robot.robotNames [0] + '/' + j, val)
 
 
 lockrhand = list()
@@ -102,12 +102,12 @@ for j,v in robot.rightHandOpen.iteritems():
         val = [v,]
     else:
         val = v;
-    ps.createLockedJoint ('romeo/' + j, robot.displayName + '/' + j, val)
+    ps.createLockedJoint ('romeo/' + j, robot.robotNames [0] + '/' + j, val)
 lockHands = lockrhand + locklhand
 
 ## Create static stability constraint
-robot.leftAnkle  = robot.displayName + '/' + robot.leftAnkle
-robot.rightAnkle = robot.displayName + '/' + robot.rightAnkle
+robot.leftAnkle  = robot.robotNames [0] + '/' + robot.leftAnkle
+robot.rightAnkle = robot.robotNames [0] + '/' + robot.rightAnkle
 ps.addPartialCom ('romeo', ['romeo/root_joint'])
 q = robot.getInitialConfig ()
 r = placard.rank
