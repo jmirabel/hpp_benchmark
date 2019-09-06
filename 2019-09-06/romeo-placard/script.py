@@ -5,7 +5,7 @@
 
 from __future__ import print_function
 from argparse import ArgumentParser
-import time, CORBA, re, os, sys
+import time, re, os, sys
 from hpp.corbaserver.manipulation import ProblemSolver, ConstraintGraph, \
     ConstraintGraphFactory, Constraints, Rule, Client
 from hpp.corbaserver.manipulation.romeo import Robot
@@ -60,8 +60,9 @@ def createGraspConstraint(gripperName, handleName):
 
 def benchConstraints (constraints, lockDofs):
     ps.client.basic.problem.resetConstraints()
-    ps.setNumericalConstraints ("test", constraints)
-    ps.setLockedJointConstraints ("test", lockDofs)
+    ps.resetConstraints ()
+    ps.addNumericalConstraints ("test", constraints)
+    ps.addLockedJointConstraints ("test", lockDofs)
     res = [None] * N
     q   = [None] * N
     err = [None] * N

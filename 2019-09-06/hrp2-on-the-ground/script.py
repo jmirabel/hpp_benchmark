@@ -32,7 +32,7 @@ ps = ProblemSolver (robot)
 ps.addPartialCom ('hrp2_14', ['root_joint'])
 robot.createSlidingStabilityConstraint ("balance/", 'hrp2_14', robot.leftAnkle,
                                         robot.rightAnkle,q0)
-ps.setNumericalConstraints ("balance", ["balance/relative-com",
+ps.addNumericalConstraints ("balance", ["balance/relative-com",
                                         "balance/relative-pose",
                                         "balance/pose-left-foot",])
 
@@ -50,7 +50,7 @@ for name, value in lockedjointDict.iteritems ():
     ps.createLockedJoint (ljName, name, value)
     lockedJoints.append (ljName)
 
-ps.setLockedJointConstraints ("locked-hands", lockedJoints)
+ps.addLockedJointConstraints ("locked-hands", lockedJoints)
 
 q1 = [0.0, 0.0, 0.705, 0., 0., 0., 1.0, 0.0, 0.0, 0.0, 0.0, -0.4, 0, -1.2, -1.0, 0.0, 0.0, 0.174532, -0.174532, 0.174532, -0.174532, 0.174532, -0.174532, 0.261799, -0.17453, 0.0, -0.523599, 0.0, 0.0, 0.174532, -0.174532, 0.174532, -0.174532, 0.174532, -0.174532, 0.0, 0.0, -0.453786, 0.872665, -0.418879, 0.0, 0.0, 0.0, -0.453786, 0.872665, -0.418879, 0.0]
 
