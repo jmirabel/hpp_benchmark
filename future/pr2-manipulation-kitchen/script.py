@@ -138,7 +138,7 @@ factory.setObjects (boxes, handlesPerObject, objContactSurfaces)
 factory.setRules (rules)
 factory.generate ()
 cg.addConstraints (graph = True, constraints =\
-                   Constraints (lockedJoints = locklhand))
+                   Constraints (numConstraints = locklhand))
 cg.setWeight ('Loop | f', 1)
 cg.setWeight ('Loop | 0-0', 1)
 cg.initialize ()

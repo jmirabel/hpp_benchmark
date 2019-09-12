@@ -131,9 +131,9 @@ q0_r1 = q0_r0 [::]
 ## Generate initial configurations of spheres
 q0_spheres = list ()
 i = 0
-y = -0.04
+y = 0.04
 while i < nSphere:
-  q0_spheres.append ([-0.45 - .1*(i/2), y, 0.025, 0, 0, 0, 1])
+  q0_spheres.append ([- .1*(i/2), -.12 + y, 0.025, 0, 0, 0, 1])
   i+=1; y = -y
 
 ## Generate initial configurations of cylinders
@@ -141,7 +141,7 @@ q0_cylinders = list ()
 i = 0
 y = -0.04
 while i < nCylinder:
-  q0_cylinders.append ([0.45 + .1*(i/2), y, 0.025, 0, 0, 0, 1])
+  q0_cylinders.append ([0.45 + .1*(i/2), -.12 + y, 0.025, 0, 0, 0, 1])
   i+=1; y = -y
 
 q0 = q0_r0 + q0_r1 + sum (q0_spheres, []) + sum (q0_cylinders, [])
@@ -344,3 +344,21 @@ if args.N != 0:
 
 if args.run:
   pp(0)
+
+q1 = [-1.3762019511901535, -1.6026285891202607, 1.7698841773948761, 0.07766259702973155, -0.10292472893634562, 0, -0.8453817919408094, -1.9613814755717633, 1.7509886934894354, 0.3286982532479891, -0.21554233746381954, 0.1436178636671443, 0.02673796658911215, -0.11683111862697124, 0.2805429927243004, 0.19030120185664454, -0.6901027958010973, 0.017731848182281414, 0.6980180265290187, -0.0, -0.16, 0.025, 0, 0, 0, 1, 0.014796844811246754, -0.10624562226403622, 0.34044841428272643, 0.5911820185346596, 0.40388829235346274, 0.6581270459058463, -0.2329095526343504, 0.45, -0.07999999999999999, 0.025, 0, 0, 0, 1]
+
+ps.selectSteeringMethod ('CrossStateOptimization-Straight')
+ps.setParameter ('CrossStateOptimization/maxDepth', 4)
+
+n = 'cylinder0/magnet0 grasps sphere0/magnet : r0/gripper grasps sphere0/handle : r1/gripper grasps cylinder0/handle'
+for i in range (100):
+  q = robot.shootRandomConfig ()
+  res, q1, err = cg.applyNodeConstraints (n, q)
+  if res:
+    # move cylinder 2 and sphere2 back to initial position
+    q1 [19:19+7] = q0 [19:19+7]
+    q1 [33:33+7] = q0 [33:33+7]
+    res, pid, msg = ps.directPath (q0, q1, False)
+    if res: break
+#ps.directPath (q0, q1, False)
+

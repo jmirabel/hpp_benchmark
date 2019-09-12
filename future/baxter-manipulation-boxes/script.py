@@ -165,7 +165,7 @@ factory.setObjects (boxes, handlesPerObject, objContactSurfaces)
 factory.setRules (rules)
 factory.generate ()
 cg.addConstraints (graph = True, constraints =\
-                   Constraints (lockedJoints = lockAll))
+                   Constraints (numConstraints = lockAll))
 cg.initialize ()
 
 res = ps.client.manipulation.problem.applyConstraints (cg.nodes['free'], q_init)

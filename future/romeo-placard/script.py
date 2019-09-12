@@ -5,7 +5,7 @@
 
 from __future__ import print_function
 from argparse import ArgumentParser
-import time, CORBA, re, os, sys
+import time, re, os, sys
 from hpp.corbaserver.manipulation import ProblemSolver, ConstraintGraph, \
     ConstraintGraphFactory, Constraints, Rule, Client
 from hpp.corbaserver.manipulation.romeo import Robot
@@ -60,8 +60,9 @@ def createGraspConstraint(gripperName, handleName):
 
 def benchConstraints (constraints, lockDofs):
     ps.client.basic.problem.resetConstraints()
-    ps.setNumericalConstraints ("test", constraints)
-    ps.setLockedJointConstraints ("test", lockDofs)
+    ps.resetConstraints ()
+    ps.addNumericalConstraints ("test", constraints)
+    ps.addLockedJointConstraints ("test", lockDofs)
     res = [None] * N
     q   = [None] * N
     err = [None] * N
@@ -115,10 +116,11 @@ q [r:r+3] = [.4, 0, 1.2]
 ps.addPartialCom ("romeo", ["romeo/root_joint"])
 robot.createStaticStabilityConstraint ('balance/', 'romeo', robot.leftAnkle,
                                        robot.rightAnkle, q)
-commonConstraints = Constraints (numConstraints = ['balance/pose-left-foot',
-                                                   'balance/pose-right-foot',
-                                                   'balance/relative-com'],
-                                 lockedJoints = lockHands)
+balanceConstraints = ['balance/pose-left-foot',
+                      'balance/pose-right-foot',
+                      'balance/relative-com',]
+commonConstraints = Constraints (numConstraints = balanceConstraints + \
+                                 lockHands)
 
 # build graph
 rules = [Rule (["romeo/l_hand","romeo/r_hand",], ["placard/low", ""], True),
@@ -228,9 +230,6 @@ benchGrasps.append (grasps.copy())
 
 iResults = dict()
 eResults = dict()
-balanceConstraints = ['balance/pose-left-foot',
-                      'balance/pose-right-foot',
-                      'balance/relative-com',]
 for g in benchGrasps:
     constraints = balanceConstraints + [ implicitGraspConstraints[c] for c in g ]
     iResults[tuple (g)] = benchConstraints(constraints, lockHands)
