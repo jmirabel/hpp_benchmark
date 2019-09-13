@@ -1,0 +1,93 @@
+[1;36m------- Folder collada-dom ---------------[0m
+## master...origin/master
+[1;36m------- Folder gepetto-viewer ---------------[0m
+## master...origin/master
+[1;36m------- Folder gepetto-viewer-corba ---------------[0m
+## HEAD (no branch)
+[1;36m------- Folder hpp-baxter ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp_benchmark ---------------[0m
+## master...origin/master
+A  2019-09-13/README
+A  2019-09-13/baxter-manipulation-boxes/benchmark
+A  2019-09-13/baxter-manipulation-boxes/script.py
+AM 2019-09-13/commit
+A  2019-09-13/construction-set/benchmark
+A  2019-09-13/construction-set/script.py
+A  2019-09-13/construction-set/setup.py
+A  2019-09-13/construction-set/state_name.py
+A  2019-09-13/construction-set/visibility_prm.py
+A  2019-09-13/cpuinfo
+A  2019-09-13/hrp2-on-the-ground/benchmark
+A  2019-09-13/hrp2-on-the-ground/script.py
+A  2019-09-13/meminfo
+A  2019-09-13/pr2-in-iai-kitchen/benchmark
+A  2019-09-13/pr2-in-iai-kitchen/script.py
+A  2019-09-13/pr2-manipulation-kitchen/benchmark
+A  2019-09-13/pr2-manipulation-kitchen/script.py
+A  2019-09-13/pr2-manipulation-two-hand/benchmark
+A  2019-09-13/pr2-manipulation-two-hand/script.py
+A  2019-09-13/romeo-placard/benchmark
+A  2019-09-13/romeo-placard/script.py
+[1;36m------- Folder hpp-constraints ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-corbaserver ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-core ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-doc ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-environments ---------------[0m
+## HEAD (no branch)
+[1;36m------- Folder hpp-fcl ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-gepetto-viewer ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-gui ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-hrp2 ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-manipulation ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-manipulation-corba ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-manipulation-urdf ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-pinocchio ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-plot ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp_romeo ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-statistics ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-template-corba ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp_tutorial ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-universal-robot ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-util ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-walkgen ---------------[0m
+## master...origin/master
+[1;36m------- Folder hpp-wholebody-step ---------------[0m
+## master...origin/master
+[1;36m------- Folder hrp2-14-description ---------------[0m
+## master...origin/master
+[1;36m------- Folder iai_maps ---------------[0m
+## master...origin/master
+[1;36m------- Folder osg-dae ---------------[0m
+## master...origin/master
+[1;36m------- Folder pinocchio ---------------[0m
+## HEAD (no branch)
+[1;36m------- Folder pythonqt ---------------[0m
+## qt4...origin/qt4
+[1;36m------- Folder qgv ---------------[0m
+## master...origin/master
+[1;36m------- Folder robot_capsule_urdf ---------------[0m
+## groovy...origin/groovy
+[1;36m------- Folder robot_model_py ---------------[0m
+## groovy...origin/groovy
+[1;36m------- Folder universal_robot ---------------[0m
+## kinetic...origin/kinetic
