@@ -39,10 +39,9 @@ q_goal [rank] = 0.5
 rank = robot.rankInConfiguration ['r_elbow_flex_joint']
 q_goal [rank] = -0.5
 
-vf.loadObstacleModel ("iai_maps", "kitchen_area", "kitchen")
+vf.loadObstacleModel ("package://iai_maps/urdf/kitchen_area.urdf", "kitchen")
 
 ps.selectPathValidation ("Progressive", 0.025)
-
 import datetime as dt
 totalTime = dt.timedelta (0)
 totalNumberNodes = 0
