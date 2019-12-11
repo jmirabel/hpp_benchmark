@@ -8,9 +8,8 @@ from hpp.corbaserver import loadServerPlugin
 loadServerPlugin ("corbaserver", "manipulation-corba.so")
 Client ().problem.resetProblem ()
 
-Robot.urdfName = "ur3_gripper"
-Robot.urdfSuffix = ""
-Robot.srdfSuffix = ""
+Robot.urdfFilename = "package://example-robot-data/robots/ur_description/urdf/ur3_gripper.urdf"
+Robot.srdfFilename = "package://example-robot-data/robots/ur_description/srdf/ur3_gripper.srdf"
 
 class Cylinder_08 (object):
   rootJointType = 'freeflyer'
