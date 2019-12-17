@@ -3,7 +3,7 @@
 # Note that an instance of omniNames should be running in background
 #
 
-from __future__ import print_function
+
 from argparse import ArgumentParser
 import time, re, os, sys
 from hpp.corbaserver.manipulation import ProblemSolver, ConstraintGraph, \
@@ -87,7 +87,7 @@ robot.setJointBounds (placard.name + '/root_joint', [-1,1,-1,1,0,1.5,-2.,2,
                                                      -2.,2,-2.,2,-2.,2,])
 ## Lock both hands
 locklhand = list()
-for j,v in robot.leftHandOpen.iteritems():
+for j,v in robot.leftHandOpen.items():
     locklhand.append ('romeo/' + j)
     if type(v) is float or type(v) is int:
         val = [v,]
@@ -97,7 +97,7 @@ for j,v in robot.leftHandOpen.iteritems():
 
 
 lockrhand = list()
-for j,v in robot.rightHandOpen.iteritems():
+for j,v in robot.rightHandOpen.items():
     lockrhand.append ('romeo/' + j)
     if type(v) is float or type(v) is int:
         val = [v,]
@@ -129,7 +129,7 @@ rules = [Rule (["romeo/l_hand","romeo/r_hand",], ["placard/low", ""], True),
 ]
 
 grippers = ['romeo/r_hand', 'romeo/l_hand']
-handlesPerObjects = [placard.handles.values ()]
+handlesPerObjects = [list(placard.handles.values ())]
 
 cg = ConstraintGraph.buildGenericGraph (robot, "graph",
                                         grippers,
@@ -192,7 +192,7 @@ if args.display:
         pp(0)
 
 def toVector (s):
-  return map (float, filter (lambda x: x != "", s.split (" ")))
+  return list(map (float, [x for x in s.split (" ") if x != ""]))
 
 N=10000
 qs = [None] * N
@@ -243,9 +243,9 @@ name [(('romeo/r_hand', 'placard/high'), ('romeo/l_hand', 'placard/low'))] =\
 name [(('romeo/r_hand', 'placard/high'),)] = "right hand"
 name [(('romeo/l_hand', 'placard/low'),)] = "left hand"
 
-for k, v in iResults.iteritems ():
+for k, v in iResults.items ():
   print ("Average success rate for implicit {0}: {1}".format (name [k], v [0]))
   print ("Average time for implicit {0}: {1}".format (name [k], v [1]))
-for k, v in eResults.iteritems ():
+for k, v in eResults.items ():
   print ("Average success rate for explicit {0}: {1}".format (name [k], v [0]))
   print ("Average time for explicit {0}: {1}".format (name [k], v [1]))

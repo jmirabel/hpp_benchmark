@@ -62,21 +62,21 @@ vf = ViewerFactory (ps)
 robot.setRootJointPosition ("baxter" , [-0.8,0.8, 0.926, 0, 0, 0, 1])
 vf.loadEnvironmentModel (Table, "table")
 boxes = list()
-for i in xrange(K):
+for i in range(K):
   boxes.append ("box" + str(i))
   vf.loadObjectModel (Box, boxes[i])
   robot.setJointBounds (boxes[i]+ '/root_joint', [-1,0.5,-1,2,0.6,1.9,-1,1,-1,1,-1,1,-1,1])
 
 def setBoxColors (gui):
   c = Color()
-  for i in xrange(K):
+  for i in range(K):
     gui.setColor (boxes[i], c[i])
 # 3}}}
 
 # Define configurations. {{{3
 q_init = robot.getCurrentConfig ()
 rankB = list()
-for i in xrange(K):
+for i in range(K):
   rankB.append (robot.rankInConfiguration [boxes[i] + '/root_joint'])
 
 bb = [-0.3, -0.4, 0.7, 0.9]
@@ -84,7 +84,7 @@ c = sqrt (2) / 2
 xstep = (bb[1] - bb[0]) / (nBoxPerLine - 1) if nBoxPerLine > 1 else (bb[1] - bb[0])
 nbCols = int(K * 1. / nBoxPerLine + 0.5)
 ystep = (bb[3] - bb[2]) / (nbCols - 1) if nbCols > 1 else (bb[3] - bb[2])
-for i in xrange(K):
+for i in range(K):
   iL = i % nBoxPerLine
   iC = (i - iL) / nBoxPerLine
   x = bb[0] + xstep * iL
@@ -92,7 +92,7 @@ for i in xrange(K):
   q_init [rankB[i]:rankB[i]+7] = [x, y, 0.746, 0, 0, -c, c]
 
 q_goal = q_init [::]
-for i in xrange(K):
+for i in range(K):
   r  = rankB[i]
   rn = rankB[goal[i]]
   q_goal[r:r+7] = q_init[rn:rn+7]
@@ -148,7 +148,7 @@ lockAll = lockFingers + lockHead
 handlesPerObject = list ()
 handles = list ()
 objContactSurfaces  = list ()
-for i in xrange(K):
+for i in range(K):
   handlesPerObject.append ([boxes[i] + "/handle2"])
   handles.append (boxes[i] + "/handle2")
   objContactSurfaces .append ([boxes[i] + "/box_surface"])

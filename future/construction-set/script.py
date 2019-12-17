@@ -27,7 +27,7 @@ args = parser.parse_args()
 
 def cleanPaths (ps, solutions) :
   offset = 0
-  for s, i in zip (solutions, xrange (100000)):
+  for i, s in enumerate (solutions):
     for j in range (s - offset):
       ps.erasePath (i)
       offset += 1
@@ -294,7 +294,7 @@ def displayGraph ():
 
 ## Try to connect successive configurations using Visibility PRM planner
 def solve ():
-  for p0, p1, i in zip (subgoals, subgoals [1:], xrange (100000)):
+  for i, (p0, p1) in enumerate (zip (subgoals, subgoals [1:])):
     planner = VisibilityPRM (cg = cg, ps = ps, q_init = p0, q_goal = p1,
                              state = exploreNodes [i],
                              loopTransition = loops [i], logStream = None)

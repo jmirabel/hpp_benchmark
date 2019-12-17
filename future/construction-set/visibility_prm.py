@@ -69,9 +69,8 @@ class VisibilityPRM (object):
             self.isSolved ()
         self.logStream = logStream
         # build list of nodes from current roadmap that lie in the right state
-        nodes = filter (lambda q : self.cg.getConfigErrorForEdgeLeaf \
-                        (self.loopTransition, self.q_init, q) [0],
-                        self.ps.nodes ())
+        nodes = [q for q in self.ps.nodes () if self.cg.getConfigErrorForEdgeLeaf \
+                        (self.loopTransition, self.q_init, q) [0]]
         nodes.append (self.q_init)
         nodes.append (self.q_goal)
         self.nodes = set (map (tuple, nodes))

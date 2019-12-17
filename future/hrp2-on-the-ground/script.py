@@ -8,6 +8,7 @@ from argparse import ArgumentParser
 
 from hpp.corbaserver.hrp2 import Robot
 from hpp.corbaserver import ProblemSolver
+from hpp.gepetto import ViewerFactory
 from math import pi
 
 parser = ArgumentParser()
@@ -39,13 +40,13 @@ ps.addNumericalConstraints ("balance", ["balance/relative-com",
 # lock hands in closed position
 lockedjointDict = robot.leftHandClosed ()
 lockedJoints = list ()
-for name, value in lockedjointDict.iteritems ():
+for name, value in lockedjointDict.items ():
     ljName = "locked_" + name
     ps.createLockedJoint (ljName, name, value)
     lockedJoints.append (ljName)
 
 lockedjointDict = robot.rightHandClosed ()
-for name, value in lockedjointDict.iteritems ():
+for name, value in lockedjointDict.items ():
     ljName = "locked_" + name
     ps.createLockedJoint (ljName, name, value)
     lockedJoints.append (ljName)
@@ -84,19 +85,12 @@ for i in range (args.N):
     ps.solve ()
     t2 = dt.datetime.now ()
     totalTime += t2 - t1
-    print (t2-t1)
+    print((t2-t1))
     n = len (ps.client.problem.nodes ())
     totalNumberNodes += n
-    print ("Number nodes: " + str(n))
+    print(("Number nodes: " + str(n)))
 
-print ("Average time: " + str ((totalTime.seconds+1e-6*totalTime.microseconds)/float (args.N)))
-print ("Average number nodes: " + str (totalNumberNodes/float (args.N)))
+print(("Average time: " + str ((totalTime.seconds+1e-6*totalTime.microseconds)/float (args.N))))
+print(("Average number nodes: " + str (totalNumberNodes/float (args.N))))
 
-if args.display:
-    from hpp.gepetto import ViewerFactory
-    vf = ViewerFactory (ps)
-    #v = vf.createViewer()
-    from hpp.gepetto import PathPlayer
-    pp = PathPlayer (v, robot.client)
-    if args.run:
-        pp(0)
+vf = ViewerFactory (ps)
