@@ -131,20 +131,23 @@ rules = [Rule (["romeo/l_hand","romeo/r_hand",], ["placard/low", ""], True),
 grippers = ['romeo/r_hand', 'romeo/l_hand']
 handlesPerObjects = [list(placard.handles.values ())]
 
-cg = ConstraintGraph.buildGenericGraph (robot, "graph",
-                                        grippers,
-                                        [placard.name,],
-                                        handlesPerObjects,
-                                        [[],],
-                                        [],
-                                        rules)
+lang = 'py'
 
-# cg = ConstraintGraph (robot, "graph")
-# factory = ConstraintGraphFactory (cg)
-# factory.setGrippers (grippers)
-# factory.setObjects ([placard.name,], handlesPerObjects, [[],])
-# factory.setRules (rules)
-# factory.generate ()
+if lang == 'cxx':
+  cg = ConstraintGraph.buildGenericGraph (robot, "graph",
+                                          grippers,
+                                          [placard.name,],
+                                          handlesPerObjects,
+                                          [[],],
+                                          [], rules)
+
+if lang == 'py':
+  cg = ConstraintGraph (robot, "graph")
+  factory = ConstraintGraphFactory (cg)
+  factory.setGrippers (grippers)
+  factory.setObjects ([placard.name,], handlesPerObjects, [[],])
+  factory.setRules (rules)
+  factory.generate ()
 
 cg.addConstraints (graph = True, constraints = commonConstraints)
 cg.initialize ()
@@ -238,7 +241,7 @@ for g in benchGrasps:
     eResults[tuple (g)] = benchConstraints(constraints, lockHands)
 
 name = dict ()
-name [(('romeo/r_hand', 'placard/high'), ('romeo/l_hand', 'placard/low'))] =\
+name [(('romeo/l_hand', 'placard/low'), ('romeo/r_hand', 'placard/high'))] =\
   "both hands"
 name [(('romeo/r_hand', 'placard/high'),)] = "right hand"
 name [(('romeo/l_hand', 'placard/low'),)] = "left hand"
