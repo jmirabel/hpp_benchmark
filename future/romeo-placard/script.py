@@ -76,7 +76,7 @@ def benchConstraints (constraints, lockDofs):
 ps = ProblemSolver (robot)
 vf = ViewerFactory (ps)
 
-ps.setErrorThreshold (1e-2)
+ps.setErrorThreshold (1e-4)
 ps.setMaxIterProjection (40)
 
 robot.setJointBounds ('romeo/root_joint' , [-1,1,-1,1, 0, 2,-2.,2,-2.,2,-2.,2,
