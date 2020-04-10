@@ -15,6 +15,7 @@ else:
             "baxter-two-arms-one-box",
             "baxter-two-arms-three-boxes",
             "baxter-two-arms-two-boxes",
+            "construction-set",
             "hrp2-on-the-ground",
             "kawada",
             "path_validation_manipulation",
@@ -23,6 +24,7 @@ else:
             "pr2-manipulation-kitchen",
             "pr2-manipulation-two-hand",
             "romeo-placard",
+            "ur3-spheres",
             "ur5_path_projection",
             "ur5-spline-optimization",
             ]
