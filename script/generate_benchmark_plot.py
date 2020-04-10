@@ -12,7 +12,7 @@ def readCSV (file):
     rows   = []
     with open(file, 'r') as f:
         csvReader = csv.reader(f, delimiter=';')
-        legends = csvReader.next()
+        legends = next(csvReader)
         for row in csvReader:
             labels.append(row[0])
             rows  .append(row[1:])
@@ -62,7 +62,7 @@ def generatePlot (legends, labels, rows, title, dstfile):
             color = 'r'
             style = 'ro--'
 
-        ax.plot(dates, rows[:,k], style)
+        ax.plot(dates, list(map (float, rows[:,k])), style)
 
         # Make the y-axis label, ticks and tick labels match the line color.
         ax.set_ylabel(legends[k+1], color=color)

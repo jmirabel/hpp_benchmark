@@ -37,7 +37,7 @@ def generateCSV(keys, values, csvfile, sep = ';', nan = 'nan'):
         val = values[d]
         # print(val)
         for k in keys:
-            if val.has_key(k):
+            if k in val.keys():
                 line += sep + str(float(val[k]))
             else:
                 line += sep + nan
