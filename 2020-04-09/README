@@ -1,0 +1,18 @@
+This set of benchmark has been run with a version of HPP that contains the
+following modifications:
+  - computation of right hand side of explicit constraints has been modified.
+  - construction of the constraint graph in python
+    1. inserts LevelSetEdge instances where necessary,
+    2. inserts grasp/complement constraints between pregrasp and grasp,
+    3. inserts placement/complement constraints between preplacement and
+       placement.
+
+Notes
+-----
+  1. modification 3. requires to set factory.constraints.strict to
+True in the scripts. This flag forces the factory not to use locked joints
+as complement of placement constraints.
+  2. numerical error threshold has been set to 1e-4 in benchmark romeo-placard.
+
+Warning: benchmark pr2-manipulation-kitchen returns wrong paths were the object
+jumps from one contact surface to the other one.

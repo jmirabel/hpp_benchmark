@@ -1,0 +1,7 @@
+Compared with 2020-04-09, there is one modification in hpp-manipulation-corba:
+In the construction of the constraint graph in python
+  1. grasp/complement constraints between pregrasp and grasp,
+  2. placement/complement constraints between preplacement and placement
+are not anymore inserted.
+
+Note that romeo-placard and ur3-spheres fail.

@@ -1,0 +1,4 @@
+Compared with 2020-04-10, there is one modification in hpp-manipulation-corba:
+In the construction of the constraint graph in python
+  1. grasp/complement constraints between pregrasp and grasp have been inserted
+     back.
