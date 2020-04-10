@@ -28,20 +28,20 @@ The differences between these cases resides in the following constraints
 
 ## Results
 
-| Benchmark                 | case 1 | case 2 | case 3  |
-| ------------------------- | ------ | ------ | ------- |
-| baxter-manipulate-boxes   | 4      | 3.6    | 15.8    |
-|                           | 153.4  | 133.99 | 306.1   |
-| construction-set          | 10.9   | 3.71   | 10.71   |
-|                           | 47     | 39.4   | 23.85   |
-| pr2-manipulation-kitchen  | 17.25  | 15.78  | 62.45(*)|
-|                           | 128.5  | 121.6  | 452.5   |
-| pr2-manipulation-two-hand | 4.24   | 4.43   | 22.19   |
-|                           | 44.75  | 40.6   | 315.45  |
-| romeo-placard             | fail   | 155.85 | 180.56  |
-|                           | fail   | 712.0  | 819.35  |
-| ur3-spheres               | fail   | 67.68  | 8.49    |
-|                           | fail   | 3482.0 | 260.3   |
+| Benchmark                 | case 1 | case 2 | case 3  |          |
+| ------------------------- | ------ | ------ | ------- | -------- |
+| baxter-manipulate-boxes   | 4      | 3.6    | 15.8    | time (s) |
+|                           | 153.4  | 133.99 | 306.1   | nodes    |
+| construction-set          | 10.9   | 3.71   | 10.71   | time (s) |
+|                           | 47     | 39.4   | 23.85   | nodes    |
+| pr2-manipulation-kitchen  | 17.25  | 15.78  | 62.45(*)| time (s) |
+|                           | 128.5  | 121.6  | 452.5   | nodes    |
+| pr2-manipulation-two-hand | 4.24   | 4.43   | 22.19   | time (s) |
+|                           | 44.75  | 40.6   | 315.45  | nodes    |
+| romeo-placard             | fail   | 155.85 | 180.56  | time (s) |
+|                           | fail   | 712.0  | 819.35  | nodes    |
+| ur3-spheres               | fail   | 67.68  | 8.49    | time (s) |
+|                           | fail   | 3482.0 | 260.3   | nodes    |
 
 (*) Note that in case 3, benchmark pr2-manipulation-kitchen where there are
     two contact surfaces, along solution paths, the object discontinuously jumps
