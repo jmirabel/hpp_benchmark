@@ -112,27 +112,44 @@ shapesPerObject = [[] for o in objects]
 ## Constraints
 #
 for i in range (nSphere):
-  placementName = "place_sphere{0}".format (i)
-  ps.createTransformationConstraint (placementName, "",
+  # placement constraint
+  constraintName = "place_sphere{0}".format (i)
+  ps.createTransformationConstraint (constraintName, "",
                                      "sphere{0}/root_joint".format (i),
                                      [0, 0, 0.025, 0, 0, 0, 1],
                                      [False, False, True, True, True, False])
+  # placement complement
+  constraintName = "place_sphere{0}/complement".format (i)
+  ps.createTransformationConstraint (constraintName, "",
+                                     "sphere{0}/root_joint".format (i),
+                                     [0, 0, 0.025, 0, 0, 0, 1],
+                                     [True, True, False, False, False, True])
+  ps.setConstantRightHandSide(constraintName, False)
+  # preplacement constraint
+  constraintName = "preplace_sphere{0}".format (i)
+  ps.createTransformationConstraint (constraintName, "",
+                                     "sphere{0}/root_joint".format (i),
+                                     [0, 0, 0.075, 0, 0, 0, 1],
+                                     [False, False, True, True, True, False])
+
 for i in range (nCylinder):
-  placementName = "place_cylinder{0}".format (i)
-  ps.createTransformationConstraint (placementName, "",
+  # placement constraint
+  constraintName = "place_cylinder{0}".format (i)
+  ps.createTransformationConstraint (constraintName, "",
                                      "cylinder{0}/root_joint".format (i),
                                      [0, 0, 0.025, 0, 0, 0, 1],
                                      [False, False, True, True, True, False])
 
-for i in range (nSphere):
-  placementName = "preplace_sphere{0}".format (i)
-  ps.createTransformationConstraint (placementName, "",
-                                     "sphere{0}/root_joint".format (i),
-                                     [0, 0, 0.075, 0, 0, 0, 1],
-                                     [False, False, True, True, True, False])
-for i in range (nCylinder):
-  placementName = "preplace_cylinder{0}".format (i)
-  ps.createTransformationConstraint (placementName, "",
+  # placement complement
+  constraintName = "place_cylinder{0}/complement".format (i)
+  ps.createTransformationConstraint (constraintName, "",
+                                     "cylinder{0}/root_joint".format (i),
+                                     [0, 0, 0.025, 0, 0, 0, 1],
+                                     [True, True, False, False, False, True])
+  ps.setConstantRightHandSide(constraintName, False)
+  # preplacement constraint
+  constraintName = "preplace_cylinder{0}".format (i)
+  ps.createTransformationConstraint (constraintName, "",
                                      "cylinder{0}/root_joint".format (i),
                                      [0, 0, 0.075, 0, 0, 0, 1],
                                      [False, False, True, True, True, False])
