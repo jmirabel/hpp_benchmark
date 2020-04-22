@@ -90,4 +90,6 @@ install(FILES
   future/romeo-placard/script.py
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/romeo-placard)
 
+ADD_SUBDIRECTORY(src)
+
 SETUP_HPP_PROJECT_FINALIZE()
