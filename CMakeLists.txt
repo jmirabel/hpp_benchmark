@@ -21,6 +21,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 SET(PROJECT_NAME hpp_benchmark)
 SET(PROJECT_DESCRIPTION "Benchmarks for humanoid path planner platform.")
+SET(INSTALL_DOCUMENTATION OFF)
 
 SET(CXX_DISABLE_WERROR TRUE)
 INCLUDE(cmake/hpp.cmake)

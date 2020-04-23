@@ -132,6 +132,9 @@ void BenchmarkNCase::run (int N, const std::string& name)
   clean();
 }
 
+/// \cond INTERNAL
+/** \brief Internal class used to run the benchmarks
+ */
 class BenchmarkRunner {
 public:
   static void run(int N, const std::string& name, hpp::benchmark::BenchmarkBase* problem)
@@ -139,6 +142,10 @@ public:
     problem->run(N, name);
   }
 };
+/// \endcond
+
+} // namespace benchmark
+} // namespace hpp
 
 void usage(const char* name)
 {
