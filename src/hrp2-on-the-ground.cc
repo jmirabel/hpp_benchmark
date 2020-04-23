@@ -117,7 +117,7 @@ class hrp2_on_the_ground : public BenchmarkCase {
     Configuration_t q_init, q_goal;
 
   public:
-    void setup()
+    void setup(int)
     {
       ps = ProblemSolver::create ();
 
@@ -179,7 +179,7 @@ class hrp2_on_the_ground : public BenchmarkCase {
       ps->addGoalConfig (ConfigurationPtr_t(new Configuration_t(q_goal)));
     }
 
-    void initializeProblem()
+    void initializeProblem(int)
     {
       ps->resetRoadmap();
     }

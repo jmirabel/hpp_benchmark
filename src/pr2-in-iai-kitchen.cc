@@ -37,7 +37,7 @@ class pr2_in_iai_maps : public BenchmarkCase {
     Configuration_t q_init, q_goal;
 
   public:
-    void setup()
+    void setup(int)
     {
       ps = ProblemSolver::create ();
 
@@ -83,7 +83,7 @@ class pr2_in_iai_maps : public BenchmarkCase {
       ps->addGoalConfig (ConfigurationPtr_t(new Configuration_t(q_goal)));
     }
 
-    void initializeProblem()
+    void initializeProblem(int)
     {
       ps->resetRoadmap();
     }

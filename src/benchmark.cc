@@ -5,13 +5,26 @@
 #include <math.h>
 #include <hpp/util/timer.hh>
 
-typedef std::map<std::string, hpp::benchmark::BenchmarkCase*> Problems_t;
+typedef std::map<std::string, hpp::benchmark::BenchmarkBase*> Problems_t;
 Problems_t problems;
+
+void print_header(std::ostream& os, const std::string& status)
+{
+  int size = 10;
+  int l = static_cast<int>(status.size());
+  int before = (size - l) / 2;
+  int after  = size - l - before;
+  os << '[';
+  for (int i = 0; i < before; ++i) os << ' ';
+  os << status;
+  for (int i = 0; i < after ; ++i) os << ' ';
+  os << ']' << ' ';
+}
 
 namespace hpp {
 namespace benchmark {
 
-void registerBenchmark(BenchmarkCase* p, const std::string& name)
+void registerBenchmark(BenchmarkBase* p, const std::string& name)
 {
   if (!problems.insert(std::make_pair(name, p)).second) {
     std::invalid_argument("Problem " + name + " already defined.");
@@ -36,57 +49,96 @@ void stats (result_t values, value_type& mean, value_type& std_dev)
   std_dev = std::sqrt(std_dev - mean*mean);
 }
 
-} // namespace benchmark
-} // namespace hpp
-
-void print_header(std::ostream& os, const std::string& status)
+void BenchmarkCase::run (int N, const std::string& name)
 {
-  int size = 10;
-  int l = static_cast<int>(status.size());
-  int before = (size - l) / 2;
-  int after  = size - l - before;
-  os << '[';
-  for (int i = 0; i < before; ++i) os << ' ';
-  os << status;
-  for (int i = 0; i < after ; ++i) os << ' ';
-  os << ']' << ' ';
-}
-
-void runBenchmark(int N, const std::string& name, hpp::benchmark::BenchmarkCase* problem)
-{
-  using hpp::benchmark::value_type;
-  hpp::debug::Timer timer;
+  debug::Timer timer;
 
   print_header(std::cout, "RUN");
-  std::cout << "Setup " << name << ' ' << std::flush;
-  problem->setup();
+  std::cout << "Benchmark " << name << ' ' << std::flush;
+
+  setup(N);
 
   hpp::benchmark::results_t results;
   for (int i = 0; i < N; ++i) std::cout << '.';
   for (int i = 0; i < N; ++i) std::cout << '\b';
+  std::cout << std::flush;
   for (int i = 0; i < N; ++i) {
-    problem->initializeProblem();
+    initializeProblem(i);
     timer.start();
-    problem->solveProblem();
+    solveProblem();
     timer.stop();
     results["Time (s)"].push_back(1e-3 * static_cast<value_type>(timer.duration().total_milliseconds()));
-    problem->saveResolutionResult(results);
-    if (problem->validateSolution())
+    saveResolutionResult(results);
+    if (validateSolution())
       std::cout << '|' << std::flush;
     else
       std::cout << '-' << std::flush;
   }
 
-  problem->clean();
+  clean();
   std::cout << std::endl;
 
-  hpp::benchmark::value_type mean, std_dev;
+  value_type mean, std_dev;
   for (auto& result : results) {
     print_header(std::cout, "Result");
-    hpp::benchmark::stats(result.second, mean, std_dev);
+    stats(result.second, mean, std_dev);
     std::cout << result.first << '\t' << mean << " +/- " << std_dev << '\n';
   }
 }
+
+void BenchmarkNCase::run (int N, const std::string& name)
+{
+  debug::Timer timer;
+
+  print_header(std::cout, "SETUP");
+  std::cout << "Benchmark " << name << ' ' << std::flush;
+  setup(N);
+
+  std::cout << '\n';
+  std::vector<std::string> cases (names());
+  int iCase = 0;
+  for (const std::string& ncase : cases) {
+    print_header(std::cout, "RUN");
+    std::cout << "Benchmark " << name << '/' << ncase << ' ' << std::flush;
+
+    hpp::benchmark::results_t results;
+    for (int i = 0; i < N; ++i) std::cout << '.';
+    for (int i = 0; i < N; ++i) std::cout << '\b';
+    std::cout << std::flush;
+    for (int i = 0; i < N; ++i) {
+      initializeProblem(i, iCase);
+      timer.start();
+      solveProblem();
+      timer.stop();
+      results["Time (s)"].push_back(1e-3 * static_cast<value_type>(timer.duration().total_milliseconds()));
+      saveResolutionResult(results);
+      if (validateSolution())
+        std::cout << '|' << std::flush;
+      else
+        std::cout << '-' << std::flush;
+    }
+    std::cout << std::endl;
+
+    value_type mean, std_dev;
+    for (auto& result : results) {
+      print_header(std::cout, "Result");
+      stats(result.second, mean, std_dev);
+      std::cout << result.first << '\t' << mean << " +/- " << std_dev << '\n';
+    }
+    std::cout << std::flush;
+    ++iCase;
+  }
+
+  clean();
+}
+
+class BenchmarkRunner {
+public:
+  static void run(int N, const std::string& name, hpp::benchmark::BenchmarkBase* problem)
+  {
+    problem->run(N, name);
+  }
+};
 
 void usage(const char* name)
 {
@@ -100,6 +152,8 @@ void usage(const char* name)
 
 int main(int argc, char**argv)
 {
+  using hpp::benchmark::BenchmarkRunner;
+
   int N = 20;
   int iarg = 0;
   // Parse arguments
@@ -118,7 +172,7 @@ int main(int argc, char**argv)
         std::cerr << name << " not found.\n";
         return 1;
       }
-      runBenchmark(N, name, problems[name]);
+      BenchmarkRunner::run(N, name, problems[name]);
       return 0;
     } else if (strcmp(argv[iarg], "-N") == 0) {
       N = (int)strtol(argv[++iarg],NULL,0);
@@ -127,6 +181,6 @@ int main(int argc, char**argv)
 
   // Run the benchmarks
   for (auto& pair : problems)
-    runBenchmark(N, pair.first, pair.second);
+    BenchmarkRunner::run(N, pair.first, pair.second);
   return 0;
 }
