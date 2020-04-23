@@ -19,19 +19,17 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
-SET(CXX_DISABLE_WERROR TRUE)
-INCLUDE(cmake/base.cmake)
-INCLUDE(cmake/hpp.cmake)
-INCLUDE(cmake/hpp/python.cmake)
-
 SET(PROJECT_NAME hpp_benchmark)
-SET(PROJECT_DESCRIPTION
-  "Tutorial for humanoid path planner platform."
-)
+SET(PROJECT_DESCRIPTION "Benchmarks for humanoid path planner platform.")
 
-HPP_FINDPYTHON()
+SET(CXX_DISABLE_WERROR TRUE)
+INCLUDE(cmake/hpp.cmake)
+INCLUDE(cmake/python.cmake)
 
-SETUP_HPP_PROJECT()
+COMPUTE_PROJECT_ARGS(PROJECT_ARGS LANGUAGES CXX)
+project(${PROJECT_NAME} ${PROJECT_ARGS})
+
+FINDPYTHON()
 
 ADD_DOC_DEPENDENCY("hpp-core >= 3")
 ADD_REQUIRED_DEPENDENCY("hpp-corbaserver >= 3")
@@ -91,5 +89,3 @@ install(FILES
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/romeo-placard)
 
 ADD_SUBDIRECTORY(src)
-
-SETUP_HPP_PROJECT_FINALIZE()
