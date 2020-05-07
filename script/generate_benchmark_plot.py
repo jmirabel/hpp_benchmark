@@ -72,6 +72,45 @@ def generatePlot (legends, labels, rows, title, dstfile):
     plt.savefig (dstfile)
     print("Saved plot to " + dstfile)
 
+def generateErrorBars (legends, labels, rows, title, dstfile):
+    n = len(legends) - 1
+
+    rcfigsize = plt.rcParams["figure.figsize"]
+    nrows = (n+1>>1)
+    figsize = (rcfigsize[0], nrows * rcfigsize[1])
+    fig, axes = plt.subplots(nrows = nrows,ncols=1,sharex=True,squeeze=False,figsize=figsize)
+    dates = stringsToDates (labels)
+
+    axes[0,0].set_title (title)
+
+    for ax in axes[:,0]:
+        ax.set_xlabel(legends[0])
+        plt.setp( ax.xaxis.get_majorticklabels(), rotation=70 )
+
+    for k in range(n):
+        if k % 2 == 0:
+            ax = axes[ (k>>1),0 ]
+            color = 'b'
+            ls = '-.'
+            ms = 'D'
+        else:
+            ax = axes[ (k>>1),0 ].twinx()
+            color = 'r'
+            ls = '--'
+            ms = 'o'
+
+        mean = [ np.mean(r[:,k].astype(float)) for r in rows ]
+        stddev = [ np.sqrt(np.var(r[:,k].astype(float))) for r in rows ]
+        ax.errorbar(dates, mean, yerr=stddev, ls=ls, marker=ms, color=color)
+
+        # Make the y-axis label, ticks and tick labels match the line color.
+        ax.set_ylabel(legends[k+1], color=color)
+        ax.tick_params('y', colors=color)
+
+    fig.tight_layout()
+    plt.savefig (dstfile)
+    print("Saved plot to " + dstfile)
+
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         raise RuntimeError("Expected 1 argument")

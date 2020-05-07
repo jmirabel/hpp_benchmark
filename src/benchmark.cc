@@ -95,7 +95,7 @@ struct Output {
   bool setupResultFileFromBenchmarkName(const std::string& benchName)
   {
     if (outputDir_.empty()) return false;
-    std::string filename = outputDir_ + '/' + benchName;
+    std::string filename = outputDir_ + '/' + benchName + ".csv";
     if (resFile_.is_open()) resFile_.close();
     resFile_.open(filename);
     res_ = &resFile_;
@@ -114,7 +114,7 @@ struct Output {
         return false;
       }
     }
-    std::string filename = dir + '/' + caseName;
+    std::string filename = dir + '/' + caseName + ".csv";
     if (resFile_.is_open()) resFile_.close();
     resFile_.open(filename);
     res_ = &resFile_;
