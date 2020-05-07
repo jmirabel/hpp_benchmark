@@ -111,6 +111,13 @@ void createConstraints (ProblemSolverPtr_t ps, Configuration_t q0,
   addLockedJoint (ps, "RHAND_JOINT4", { 0.0, } );
 }
 
+/**
+\brief HRP2 on the ground
+
+See \ref hpp_benchmark_cpp_hrp2_on_the_ground "the results".
+
+\ingroup hpp_benchmark_cpp
+ */
 class hrp2_on_the_ground : public BenchmarkCase {
   private:
     ProblemSolverPtr_t ps;

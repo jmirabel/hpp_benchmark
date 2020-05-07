@@ -163,6 +163,25 @@ std::vector<std::string> createConstraints (ProblemSolverPtr_t ps, Configuration
   return names;
 }
 
+/**
+\brief Comparison between implicit and explicit constraints
+
+\anchor hpp_benchmark_cpp_implicit_versus_explicit
+\par Comparison for left hand only.
+\image html "cpp/implicit_versus_explicit_Explicit left hand.svg"
+\image html "cpp/implicit_versus_explicit_Implicit left hand.svg"
+
+\par Comparison for right hand only.
+\image html "cpp/implicit_versus_explicit_Explicit both hands.svg"
+\image html "cpp/implicit_versus_explicit_Implicit both hands.svg"
+
+\par Comparison for both hands, so in the explicit case, one of the
+constraint is solved implicitely.
+\image html "cpp/implicit_versus_explicit_Explicit right hand.svg"
+\image html "cpp/implicit_versus_explicit_Implicit right hand.svg"
+
+\ingroup hpp_benchmark_cpp
+ */
 class implicit_versus_explicit : public BenchmarkNCase {
   private:
     ProblemSolverPtr_t ps;

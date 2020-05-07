@@ -31,6 +31,13 @@ using namespace hpp::core;
 
 namespace hpp {
 namespace benchmark {
+/**
+\brief PR2 in IAI maps
+
+See \ref hpp_benchmark_cpp_pr2_in_iai_maps "the results".
+
+\ingroup hpp_benchmark_cpp
+ */
 class pr2_in_iai_maps : public BenchmarkCase {
   private:
     ProblemSolverPtr_t ps;

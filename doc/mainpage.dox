@@ -1,0 +1,37 @@
+/**
+\mainpage Benchmarks for HPP
+
+Page content
+
+\section hpp_benchmark_cpp_sec C++ benchmark results
+
+\anchor hpp_benchmark_cpp_pr2_in_iai_maps
+\copybrief hpp::benchmark::pr2_in_iai_maps
+\image html cpp/pr2_in_iai_maps.svg
+
+\anchor hpp_benchmark_cpp_hrp2_on_the_ground
+\copybrief hpp::benchmark::hrp2_on_the_ground
+\image html cpp/hrp2_on_the_ground.svg
+
+\anchor hpp_benchmark_cpp_implicit_versus_explicit_notice
+\copybrief hpp::benchmark::implicit_versus_explicit
+See \ref hpp_benchmark_cpp_implicit_versus_explicit "the results".
+
+\page hpp_benchmarks_missing Missing benchmarks
+
+\todo add a benchmark for SplineGradientBased_bezier1 optimizer in C++.
+   \code
+      bool loaded;
+      try {
+        std::string filename = plugin::findPluginLibrary ("spline-gradient-based.so");
+        loaded = plugin::loadPlugin (filename, ps);
+      } catch (const std::invalid_argument&) {
+        loaded = false;
+      }
+      if (loaded)
+        ps->addPathOptimizer("SplineGradientBased_bezier1");
+   \endcode
+
+\defgroup hpp_benchmark_cpp C++ benchmarks
+\defgroup python_benchmark_cpp Python benchmarks
+*/
