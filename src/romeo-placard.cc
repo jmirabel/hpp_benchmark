@@ -279,6 +279,7 @@ class implicit_versus_explicit : public BenchmarkNCase {
 
       // Generate the random configurations
       nCfgPerCase = 100;
+      time_scale = 1/(value_type)nCfgPerCase;
       qs.resize(nCfgPerCase * NIter);
       core::ConfigurationShooterPtr_t shooter (ps->problem()->configurationShooter());
       for (Configuration_t& q : qs) shooter->shoot(q);

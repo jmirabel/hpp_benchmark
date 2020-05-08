@@ -14,6 +14,8 @@ try:
 except:
     output_dir="./results/cpp"
 
+if not os.path.isdir(output_dir): os.mkdir(output_dir)
+
 csv_files = []
 n = len(result_dir) + 1
 for root, dirs, files in os.walk (result_dir):

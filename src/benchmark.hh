@@ -16,6 +16,8 @@ class BenchmarkRunner;
  */
 class BenchmarkBase {
   public:
+    BenchmarkBase () : time_scale (1.) {}
+
     virtual ~BenchmarkBase () {}
 
     /** \brief Initialize the benchmark
@@ -34,6 +36,12 @@ class BenchmarkBase {
      * you do.
      */
     virtual void run(int N, const std::string& name) = 0;
+
+    /// Scale the elapsed time by this amount.
+    /// This is useful for bencharking more accurately fast benchmarks. In this
+    /// one can implement \ref run such that it run N times the same thing,
+    /// and set the \c time_scale to 1/N.
+    value_type time_scale;
 
     friend class BenchmarkRunner;
 }; // class BenchmarkBase
