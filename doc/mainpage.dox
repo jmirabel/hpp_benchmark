@@ -24,9 +24,6 @@ Those benchmarks uses the Python interface and communicate with HPP through CORB
 \anchor hpp_benchmark_python_construction_set
 \image html construction-set.svg
 
-\anchor hpp_benchmark_python_ur5_spline_optimization
-\image html ur5-spline-optimization.svg
-
 \anchor hpp_benchmark_python_pr2_manipulation_kitchen
 \image html pr2-manipulation-kitchen.svg
 
