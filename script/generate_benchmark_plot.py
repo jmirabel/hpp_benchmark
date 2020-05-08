@@ -44,12 +44,16 @@ def generatePlot (legends, labels, rows, title, dstfile):
     nrows = (n+1>>1)
     figsize = (rcfigsize[0], nrows * rcfigsize[1])
     fig, axes = plt.subplots(nrows = nrows,ncols=1,sharex=True,squeeze=False,figsize=figsize)
-    dates = stringsToDates (labels)
+    # TODO check that the labels are sorted.
+    # otherwise sort xticks accordingly
+    xticks = range(len(labels))
 
     axes[0,0].set_title (title)
 
     for ax in axes[:,0]:
         ax.set_xlabel(legends[0])
+        ax.set_xticks(xticks)
+        ax.set_xticklabels(labels)
         plt.setp( ax.xaxis.get_majorticklabels(), rotation=70 )
 
     for k in range(n):
@@ -62,7 +66,7 @@ def generatePlot (legends, labels, rows, title, dstfile):
             color = 'r'
             style = 'ro--'
 
-        ax.plot(dates, list(map (float, rows[:,k])), style)
+        ax.plot(xticks, list(map (float, rows[:,k])), style)
 
         # Make the y-axis label, ticks and tick labels match the line color.
         ax.set_ylabel(legends[k+1], color=color)
@@ -79,12 +83,16 @@ def generateErrorBars (legends, labels, rows, title, dstfile):
     nrows = (n+1>>1)
     figsize = (rcfigsize[0], nrows * rcfigsize[1])
     fig, axes = plt.subplots(nrows = nrows,ncols=1,sharex=True,squeeze=False,figsize=figsize)
-    dates = stringsToDates (labels)
+    # TODO check that the labels are sorted.
+    # otherwise sort xticks accordingly
+    xticks = range(len(labels))
 
     axes[0,0].set_title (title)
 
     for ax in axes[:,0]:
         ax.set_xlabel(legends[0])
+        ax.set_xticks(xticks)
+        ax.set_xticklabels(labels)
         plt.setp( ax.xaxis.get_majorticklabels(), rotation=70 )
 
     for k in range(n):
@@ -101,7 +109,7 @@ def generateErrorBars (legends, labels, rows, title, dstfile):
 
         mean = [ np.mean(r[:,k].astype(float)) for r in rows ]
         stddev = [ np.sqrt(np.var(r[:,k].astype(float))) for r in rows ]
-        ax.errorbar(dates, mean, yerr=stddev, ls=ls, marker=ms, color=color)
+        ax.errorbar(xticks, mean, yerr=stddev, ls=ls, marker=ms, color=color)
 
         # Make the y-axis label, ticks and tick labels match the line color.
         ax.set_ylabel(legends[k+1], color=color)

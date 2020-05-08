@@ -125,7 +125,7 @@ struct Output {
   {
     std::vector< std::vector<hpp::benchmark::value_type> > csvContent;
     bool first = true;
-    r() << "Date";
+    r() << "Label";
     for (auto& result : results) {
       if (first) csvContent.resize(result.second.size());
       r() << "; " << result.first;
@@ -206,7 +206,7 @@ void BenchmarkCase::run (int N, const std::string& name)
     timer.start();
     solveProblem();
     timer.stop();
-    results["Time (s)"].push_back(time_scale * 1e-3 * static_cast<value_type>(timer.duration().total_milliseconds()));
+    results["Time (s)"].push_back(time_scale * 1e-6 * static_cast<value_type>(timer.duration().total_microseconds()));
     saveResolutionResult(results);
     if (validateSolution()) output.pb_ok();
     else                    output.pb_bad();
@@ -292,7 +292,7 @@ void usage(const char* name)
     << " --list           list benchmarks and exit\n"
     << " --run <name>     run only one benchmark (instead of all by default). All options after this are ignored.\n"
     << " --output <dir>   directory where to write the benchmark results. If not specified, result are saved.\n"
-    << " --today <date>   date written in the result file indicating when the script was run.\n"
+    << " --label <label>  label (version, date...) indicating when the script was run (written in the result file).\n"
     << " -N <integer>     set the number of repetition for a benchmark\n"
     << std::flush;
 }
@@ -326,8 +326,8 @@ int main(int argc, char**argv)
     } else if (strcmp(argv[iarg], "--output") == 0) {
       CHECK_REMAINING_ARGC(iarg, 1, "--output");
       output.setOutputDir(argv[++iarg]);
-    } else if (strcmp(argv[iarg], "--date") == 0) {
-      CHECK_REMAINING_ARGC(iarg, 1, "--date");
+    } else if (strcmp(argv[iarg], "--label") == 0) {
+      CHECK_REMAINING_ARGC(iarg, 1, "--label");
       output.today = argv[++iarg];
     } else if (strcmp(argv[iarg], "-N") == 0) {
       CHECK_REMAINING_ARGC(iarg, 1, "-N");

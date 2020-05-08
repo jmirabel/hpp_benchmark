@@ -22,6 +22,8 @@ for root, dirs, files in os.walk (result_dir):
     for f in filter(lambda fn: fn.endswith(".csv"), files):
         csv_files.append(os.path.join(root[n:], f[:-4]))
 
+csv_files.sort()
+
 benchmarks = dict()
 for csv in csv_files:
     year, month, day, bench = csv.split(sep=os.path.sep, maxsplit=3)
