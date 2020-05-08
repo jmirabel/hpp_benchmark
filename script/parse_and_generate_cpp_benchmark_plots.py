@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from __future__ import print_function
 import os, sys
-from generate_benchmark_plot import readCSV, generateBoxPlot
+from generate_benchmark_plot import readCSV, generateErrorBars
 
 # To generate this list:
 # find 20*/* -type d | sed 's/^[^\/]*\///' | sort | uniq
@@ -9,6 +9,10 @@ from generate_benchmark_plot import readCSV, generateBoxPlot
 root_dir="."
 result_dir="./results/cpp"
 script_dir="./script"
+try:
+    output_dir = sys.argv[1]
+except:
+    output_dir="./results/cpp"
 
 csv_files = []
 n = len(result_dir) + 1
@@ -41,5 +45,5 @@ for bench, csvfiles in benchmarks.items():
         print("This should not happen: No data in file " + csv)
         continue
 
-    svg = os.path.join (result_dir, bench.replace('/','_') + ".svg")
-    generateBoxPlot (legends, labels, rows, bench, svg)
+    svg = os.path.join (output_dir, bench.replace('/','_') + ".svg")
+    generateErrorBars (legends, labels, rows, bench, svg)

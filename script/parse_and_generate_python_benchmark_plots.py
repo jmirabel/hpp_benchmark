@@ -6,8 +6,8 @@ from generate_benchmark_plot import readCSV, generatePlot
 # To generate this list:
 # find 20*/* -type d | sed 's/^[^\/]*\///' | sort | uniq
 
-if len(sys.argv) > 1:
-    benchmarks = sys.argv[1:]
+if len(sys.argv) > 2:
+    benchmarks = sys.argv[2:]
 else:
     benchmarks=[
             "baxter-manipulation-boxes",
@@ -30,8 +30,11 @@ else:
             ]
 
 root_dir="."
-output_dir="./results"
 script_dir="./script"
+try:
+    output_dir = sys.argv[1]
+except:
+    output_dir="./results"
 
 if not os.path.isdir(output_dir): os.mkdir(output_dir)
 

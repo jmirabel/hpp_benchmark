@@ -1,9 +1,9 @@
 /**
 \mainpage Benchmarks for HPP
 
-Page content
+\subsubsection hpp_benchmark_cpp_sec C++ benchmark results
 
-\section hpp_benchmark_cpp_sec C++ benchmark results
+Those benchmarks uses the C++ native interface of HPP.
 
 \anchor hpp_benchmark_cpp_pr2_in_iai_maps
 \copybrief hpp::benchmark::pr2_in_iai_maps
@@ -17,9 +17,36 @@ Page content
 \copybrief hpp::benchmark::implicit_versus_explicit
 See \ref hpp_benchmark_cpp_implicit_versus_explicit "the results".
 
+\subsubsection hpp_benchmark_python_sec Python benchmark results
+
+Those benchmarks uses the Python interface and communicate with HPP through CORBA.
+
+\anchor hpp_benchmark_python_construction_set
+\image html construction-set.svg
+
+\anchor hpp_benchmark_python_ur5_spline_optimization
+\image html ur5-spline-optimization.svg
+
+\anchor hpp_benchmark_python_pr2_manipulation_kitchen
+\image html pr2-manipulation-kitchen.svg
+
+\anchor hpp_benchmark_python_pr2_manipulation_two_hand
+\image html pr2-manipulation-two-hand.svg
+
+\anchor hpp_benchmark_python_ur3_spheres
+\image html ur3-spheres.svg
+
+\anchor hpp_benchmark_python_baxter_manipulation
+Baxter manipulating boxes on a table.
+\image html baxter-manipulation-boxes.svg
+
 \page hpp_benchmarks_missing Missing benchmarks
 
 \todo add a benchmark for SplineGradientBased_bezier1 optimizer in C++.
+   To ensure consistency across versions, we should generate several paths manually
+   (rebuild the output path of a RRT) and compare the path length after optimization.
+   This assumes that the method to mesure the length will be coherent across versions.
+   The piece of code to load the plugin:
    \code
       bool loaded;
       try {
@@ -31,6 +58,8 @@ See \ref hpp_benchmark_cpp_implicit_versus_explicit "the results".
       if (loaded)
         ps->addPathOptimizer("SplineGradientBased_bezier1");
    \endcode
+
+\todo should we duplicate hrp2-on-the-ground, pr2-in-iai-kitchen and romeo-placard ?
 
 \defgroup hpp_benchmark_cpp C++ benchmarks
 \defgroup python_benchmark_cpp Python benchmarks
