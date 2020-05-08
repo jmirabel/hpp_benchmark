@@ -19,23 +19,23 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
-SET(CXX_DISABLE_WERROR TRUE)
-INCLUDE(cmake/base.cmake)
-INCLUDE(cmake/hpp.cmake)
-INCLUDE(cmake/hpp/python.cmake)
-
 SET(PROJECT_NAME hpp_benchmark)
-SET(PROJECT_DESCRIPTION
-  "Tutorial for humanoid path planner platform."
-)
+SET(PROJECT_DESCRIPTION "Benchmarks for humanoid path planner platform.")
+SET(INSTALL_DOCUMENTATION OFF)
 
-HPP_FINDPYTHON()
+SET(CXX_DISABLE_WERROR TRUE)
+INCLUDE(cmake/hpp.cmake)
+INCLUDE(cmake/python.cmake)
 
-SETUP_HPP_PROJECT()
+COMPUTE_PROJECT_ARGS(PROJECT_ARGS LANGUAGES CXX)
+project(${PROJECT_NAME} ${PROJECT_ARGS})
 
-ADD_DOC_DEPENDENCY("hpp-core >= 3")
-ADD_REQUIRED_DEPENDENCY("hpp-corbaserver >= 3")
-ADD_REQUIRED_DEPENDENCY("hpp-gepetto-viewer")
+FINDPYTHON()
+
+ADD_PROJECT_DEPENDENCY(hpp-core 4)
+ADD_PROJECT_DEPENDENCY(hpp-corbaserver 4 REQUIRED)
+ADD_PROJECT_DEPENDENCY(hpp-gepetto-viewer 4 REQUIRED)
+ADD_PROJECT_DEPENDENCY(hpp-manipulation-urdf 4 REQUIRED)
 
 SET(CATKIN_PACKAGE_SHARE_DESTINATION
   ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME})
@@ -90,4 +90,46 @@ install(FILES
   future/romeo-placard/script.py
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/romeo-placard)
 
-SETUP_HPP_PROJECT_FINALIZE()
+ADD_SUBDIRECTORY(src)
+
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/images/cpp)
+if(false)
+add_custom_target(images
+  ${PYTHON_EXECUTABLE} script/parse_and_generate_python_benchmark_plots.py ${CMAKE_BINARY_DIR}/images
+  COMMAND ${PYTHON_EXECUTABLE} script/parse_and_generate_cpp_benchmark_plots.py ${CMAKE_BINARY_DIR}/images/cpp
+  COMMENT "Generating benchmark images"
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  )
+add_dependencies(doc images)
+else()
+set(ALL_GENERATED_IMAGES
+  "${CMAKE_BINARY_DIR}/images/baxter-manipulation-boxes.svg"
+  "${CMAKE_BINARY_DIR}/images/baxter-manipulation-boxes-easy.svg"
+  "${CMAKE_BINARY_DIR}/images/baxter-two-arms-three-boxes.svg"
+  "${CMAKE_BINARY_DIR}/images/baxter-two-arms-two-boxes.svg"
+  "${CMAKE_BINARY_DIR}/images/construction-set.svg"
+  "${CMAKE_BINARY_DIR}/images/hrp2-on-the-ground.svg"
+  "${CMAKE_BINARY_DIR}/images/pr2-in-iai-kitchen.svg"
+  "${CMAKE_BINARY_DIR}/images/pr2-manipulation-kitchen.svg"
+  "${CMAKE_BINARY_DIR}/images/pr2-manipulation-two-hand.svg"
+  "${CMAKE_BINARY_DIR}/images/romeo-placard.svg"
+  "${CMAKE_BINARY_DIR}/images/ur3-spheres.svg"
+  "${CMAKE_BINARY_DIR}/images/ur5-spline-optimization.svg"
+  "${CMAKE_BINARY_DIR}/images/cpp/pr2_in_iai_maps.svg"
+  "${CMAKE_BINARY_DIR}/images/cpp/hrp2_on_the_ground.svg"
+  "${CMAKE_BINARY_DIR}/images/cpp/implicit_versus_explicit_Explicit left hand.svg"
+  "${CMAKE_BINARY_DIR}/images/cpp/implicit_versus_explicit_Explicit right hand.svg"
+  "${CMAKE_BINARY_DIR}/images/cpp/implicit_versus_explicit_Implicit both hands.svg"
+  "${CMAKE_BINARY_DIR}/images/cpp/implicit_versus_explicit_Implicit right hand.svg"
+  "${CMAKE_BINARY_DIR}/images/cpp/implicit_versus_explicit_Explicit both hands.svg"
+  "${CMAKE_BINARY_DIR}/images/cpp/implicit_versus_explicit_Implicit left hand.svg"
+  )
+add_custom_command(OUTPUT ${ALL_GENERATED_IMAGES}
+  COMMAND ${PYTHON_EXECUTABLE} script/parse_and_generate_python_benchmark_plots.py ${CMAKE_BINARY_DIR}/images
+  COMMAND ${PYTHON_EXECUTABLE} script/parse_and_generate_cpp_benchmark_plots.py ${CMAKE_BINARY_DIR}/images/cpp
+  COMMENT "Generating benchmark images"
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  )
+add_custom_target(images DEPENDS ${ALL_GENERATED_IMAGES})
+add_dependencies(doc images)
+endif()
