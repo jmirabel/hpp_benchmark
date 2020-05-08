@@ -287,11 +287,11 @@ public:
 
 void usage(const char* name)
 {
-  std::cout << name
+  std::cout << name << '\n'
     << " --help           show usage and exit\n"
     << " --list           list benchmarks and exit\n"
-    << " --run <name>     run only one benchmark. All options after this are ignored.\n"
-    << " --output <dir>   directory where to write the benchmark results.\n"
+    << " --run <name>     run only one benchmark (instead of all by default). All options after this are ignored.\n"
+    << " --output <dir>   directory where to write the benchmark results. If not specified, result are saved.\n"
     << " --today <date>   date written in the result file indicating when the script was run.\n"
     << " -N <integer>     set the number of repetition for a benchmark\n"
     << std::flush;

@@ -1,7 +1,3 @@
-ADD_REQUIRED_DEPENDENCY("hpp-core >= 4")
-ADD_REQUIRED_DEPENDENCY("hpp-manipulation >= 4")
-ADD_REQUIRED_DEPENDENCY("hpp-manipulation-urdf >= 4")
-
 ADD_EXECUTABLE(benchmarks
   benchmark.cc
   pr2-in-iai-kitchen.cc
@@ -9,6 +5,5 @@ ADD_EXECUTABLE(benchmarks
   romeo-placard.cc
   )
 
-PKG_CONFIG_USE_DEPENDENCY(benchmarks hpp-core)
-PKG_CONFIG_USE_DEPENDENCY(benchmarks hpp-manipulation)
-PKG_CONFIG_USE_DEPENDENCY(benchmarks hpp-manipulation-urdf)
+target_link_libraries(benchmarks hpp-core::hpp-core
+  hpp-manipulation-urdf::hpp-manipulation-urdf)
