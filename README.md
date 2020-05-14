@@ -6,7 +6,7 @@ A set of benchmark to track the evolution of performances of HPP.
 
 Compile target `benchmarks` and run
 ```cpp
-benchmarks --output {source_dir}/results/cpp/{year}/{month}/{day}
+benchmarks --output {source_dir}/results/cpp/{year}/{month}/{day} --label <version>
 ```
 Option `--output <dir>` can be omitted if you do not want to save the results to the disk.
 See `benchmarks --help` for more usage.
